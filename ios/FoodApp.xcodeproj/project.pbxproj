@@ -14,6 +14,11 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-FoodApp-FoodAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-FoodApp-FoodAppTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		E016AEC2674B483B9295F493 /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 913382F4D0EA45D3BCE845EC /* NotoSans-Bold.ttf */; };
+		EF562C2C24D64294A77C539D /* NotoSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 71C44CF5D54748289CA17328 /* NotoSans-ExtraBold.ttf */; };
+		30B5A45347794F32B2EBEC49 /* NotoSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF83E88902FF41F8ACDCF018 /* NotoSans-Medium.ttf */; };
+		B6A0A85B334745B1BCFA4B5F /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 582D40841AD747B1B7D1BE9C /* NotoSans-Regular.ttf */; };
+		0C11CD72F2664239ACE90905 /* NotoSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A96332D6478146458E26CA60 /* NotoSans-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +50,11 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = FoodApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-FoodApp-FoodAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodApp-FoodAppTests.release.xcconfig"; path = "Target Support Files/Pods-FoodApp-FoodAppTests/Pods-FoodApp-FoodAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		913382F4D0EA45D3BCE845EC /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; name = "NotoSans-Bold.ttf"; path = "../src/assets/fonts/NotoSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		71C44CF5D54748289CA17328 /* NotoSans-ExtraBold.ttf */ = {isa = PBXFileReference; name = "NotoSans-ExtraBold.ttf"; path = "../src/assets/fonts/NotoSans-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DF83E88902FF41F8ACDCF018 /* NotoSans-Medium.ttf */ = {isa = PBXFileReference; name = "NotoSans-Medium.ttf"; path = "../src/assets/fonts/NotoSans-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		582D40841AD747B1B7D1BE9C /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; name = "NotoSans-Regular.ttf"; path = "../src/assets/fonts/NotoSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A96332D6478146458E26CA60 /* NotoSans-SemiBold.ttf */ = {isa = PBXFileReference; name = "NotoSans-SemiBold.ttf"; path = "../src/assets/fonts/NotoSans-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +134,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				F3D85E16BB5148CF87C987E4 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -149,6 +160,19 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		F3D85E16BB5148CF87C987E4 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				913382F4D0EA45D3BCE845EC /* NotoSans-Bold.ttf */,
+				71C44CF5D54748289CA17328 /* NotoSans-ExtraBold.ttf */,
+				DF83E88902FF41F8ACDCF018 /* NotoSans-Medium.ttf */,
+				582D40841AD747B1B7D1BE9C /* NotoSans-Regular.ttf */,
+				A96332D6478146458E26CA60 /* NotoSans-SemiBold.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -245,6 +269,11 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				E016AEC2674B483B9295F493 /* NotoSans-Bold.ttf in Resources */,
+				EF562C2C24D64294A77C539D /* NotoSans-ExtraBold.ttf in Resources */,
+				30B5A45347794F32B2EBEC49 /* NotoSans-Medium.ttf in Resources */,
+				B6A0A85B334745B1BCFA4B5F /* NotoSans-Regular.ttf in Resources */,
+				0C11CD72F2664239ACE90905 /* NotoSans-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
