@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
     fontFamily: 'NotoSans-Medium',
     color: AppColor.borderColor,
     fontSize: responsive(15),
+    textAlign:'center'
   },
   buttonHolder: {
     width: '90%',

@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import Welcome from './src/screens/auth/Welcome';
 import NoInternet from './src/utils/NoInternet';
 import NetInfo from '@react-native-community/netinfo';
+import Login from './src/screens/auth/Login';
 
 const App = () => {
   const [isConnected, setIsConnected] = useState(true);
@@ -15,7 +16,7 @@ const App = () => {
   }, []);
 
   return (
-    <View style={{flex: 1}}>{isConnected ? <Welcome /> : <NoInternet />}</View>
+    <View style={{flex: 1}}>{isConnected ? <Login /> : <NoInternet />}</View>
   );
 };
 export default App;
