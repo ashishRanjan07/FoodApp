@@ -17,8 +17,10 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import CustomButton from '../../components/CustomButton';
+import { useNavigation } from '@react-navigation/native';
 
 const Registration = () => {
+    const navigation = useNavigation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [mobile, setMobile] = useState('');
@@ -110,10 +112,10 @@ const Registration = () => {
               title={'Registration'}
               color={AppColor.yellow}
               textColor={AppColor.white}
-              handleAction={() => console.log('Clicked on registration')}
+              handleAction={() =>navigation.navigate('Login')}
             />
 
-            <TouchableOpacity style={styles.textHolder}>
+            <TouchableOpacity style={styles.textHolder} onPress={()=> navigation.navigate('Login')}>
               <Text style={styles.forgetText}>Already have an account?</Text>
             </TouchableOpacity>
           </View>

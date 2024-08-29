@@ -16,8 +16,10 @@ import {responsive} from '../../utils/Responsive';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import CustomButton from '../../components/CustomButton';
+import { useNavigation } from '@react-navigation/native';
 
 const Login = () => {
+  const navigation =useNavigation();
   const [userId, setUserId] = useState('');
   const [password, setUserPassword] = useState('');
   const [showPassword, setShowPassword] = useState(true);
@@ -88,13 +90,13 @@ const Login = () => {
             title={'Login'}
             color={AppColor.yellow}
             textColor={AppColor.white}
-            handleAction={() => console.log('Clicked on the login Button')}
+            handleAction={() => navigation.navigate("App Stack")}
           />
           <TouchableOpacity style={styles.textHolder}>
             <Text style={styles.forgetText}>Forget Password?</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.textHolder}>
+          <TouchableOpacity style={styles.textHolder} onPress={()=> navigation.navigate("Registration")}>
             <Text style={styles.forgetText}>Don't have an account?</Text>
           </TouchableOpacity>
         </Animated.View>
