@@ -5,6 +5,8 @@ export const AppColor ={
     success:'green',
     warning:'red',
     borderColor: '#93AFAC',
-    yellow:'#f3c925'
+    yellow:'#f3c925',
+    red:'#FF474D',
+    blue:'#0080FF',
     
 }

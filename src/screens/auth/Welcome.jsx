@@ -48,7 +48,7 @@ const Welcome = () => {
             <View style={styles.buttonHolder}>
               <CustomButton
                 title={'Registration'}
-                color={'#0080FF'}
+                color={AppColor.blue}
                 textColor={AppColor.white}
                 handleAction={() =>
                   navigation.navigate('Registration')
@@ -56,7 +56,7 @@ const Welcome = () => {
               />
               <CustomButton
                 title={'Login'}
-                color={'#FF474D'}
+                color={AppColor.red}
                 textColor={AppColor.white}
                 handleAction={() => navigation.navigate('Login')}
               />
