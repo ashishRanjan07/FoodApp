@@ -12,8 +12,10 @@ import {ImagePath} from '../../utils/ImagePath';
 import {responsive} from '../../utils/Responsive';
 import CustomButton from '../../components/CustomButton';
 import DeviceInfo from 'react-native-device-info';
+import { useNavigation } from '@react-navigation/native';
 
 const Welcome = () => {
+  const navigation = useNavigation();
   const positionAnim = useRef(new Animated.ValueXY({x: 0, y: 250})).current;
 
   useEffect(() => {
@@ -49,21 +51,21 @@ const Welcome = () => {
                 color={'#0080FF'}
                 textColor={AppColor.white}
                 handleAction={() =>
-                  console.log('clicked on the Registration Button')
+                  navigation.navigate('Registration')
                 }
               />
               <CustomButton
                 title={'Login'}
                 color={'#FF474D'}
                 textColor={AppColor.white}
-                handleAction={() => console.log('clicked on the Login Button')}
+                handleAction={() => navigation.navigate('Login')}
               />
             </View>
           </View>
         </Animated.View>
         <View style={styles.versionHolder}>
           <Text style={styles.versionText}>
-            App version : {DeviceInfo.getVersion()}
+            V.{DeviceInfo.getVersion()}
           </Text>
         </View>
       </ImageBackground>
