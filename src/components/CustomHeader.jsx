@@ -9,7 +9,7 @@ const CustomHeader = ({title}) => {
 
   return (
     <View style={styles.main}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
         <MaterialIcons
           name="arrow-back"
           color={AppColor.black}
