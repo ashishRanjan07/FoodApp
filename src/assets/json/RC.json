@@ -1,0 +1,221 @@
+{
+    "categories": [
+      {
+        "category": "Subscription",
+        "category_image": "https://example.com/images/subscription.jpg",
+        "restaurants": [
+          {
+            "restaurant_id": 1,
+            "name": "FitLife Subscription Meals",
+            "image": "https://example.com/images/fitlife.jpg",
+            "rating": 4.5,
+            "distance": "2.5 km",
+            "delivery_time": "30-40 mins",
+            "menu": [
+              {
+                "food_id": 101,
+                "name": "Keto Salad",
+                "image": "https://example.com/images/keto_salad.jpg",
+                "rating": 4.7,
+                "description": "A healthy low-carb salad with fresh greens, avocado, and grilled chicken.",
+                "price": 10.99,
+                "ingredients": ["lettuce", "avocado", "grilled chicken", "olive oil", "lemon"],
+                "calories": 250
+              },
+              {
+                "food_id": 102,
+                "name": "Protein Power Bowl",
+                "image": "https://example.com/images/power_bowl.jpg",
+                "rating": 4.8,
+                "description": "A protein-rich bowl with quinoa, beans, grilled tofu, and vegetables.",
+                "price": 12.49,
+                "ingredients": ["quinoa", "black beans", "tofu", "broccoli", "sweet potato"],
+                "calories": 350
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category": "Breakfast",
+        "category_image": "https://example.com/images/subscription.jpg",
+        "restaurants": [
+          {
+            "restaurant_id": 2,
+            "name": "Morning Delights",
+            "image": "https://example.com/images/morning_delights.jpg",
+            "rating": 4.2,
+            "distance": "1.2 km",
+            "delivery_time": "20-30 mins",
+            "menu": [
+              {
+                "food_id": 201,
+                "name": "Pancakes with Syrup",
+                "image": "https://example.com/images/pancakes.jpg",
+                "rating": 4.6,
+                "description": "Fluffy pancakes served with maple syrup and fresh berries.",
+                "price": 5.99,
+                "ingredients": ["flour", "eggs", "milk", "maple syrup", "strawberries"],
+                "calories": 400
+              },
+              {
+                "food_id": 202,
+                "name": "Avocado Toast",
+                "image": "https://example.com/images/avocado_toast.jpg",
+                "rating": 4.4,
+                "description": "Whole grain toast topped with smashed avocado and poached eggs.",
+                "price": 6.99,
+                "ingredients": ["whole grain bread", "avocado", "eggs", "olive oil"],
+                "calories": 320
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category": "Lunch",
+        "category_image": "https://example.com/images/subscription.jpg",
+        "restaurants": [
+          {
+            "restaurant_id": 3,
+            "name": "Midday Feast",
+            "image": "https://example.com/images/midday_feast.jpg",
+            "rating": 4.7,
+            "distance": "3.0 km",
+            "delivery_time": "40-50 mins",
+            "menu": [
+              {
+                "food_id": 301,
+                "name": "Grilled Chicken Wrap",
+                "image": "https://example.com/images/chicken_wrap.jpg",
+                "rating": 4.6,
+                "description": "Whole wheat wrap with grilled chicken, lettuce, and a creamy sauce.",
+                "price": 8.99,
+                "ingredients": ["whole wheat wrap", "grilled chicken", "lettuce", "mayo"],
+                "calories": 450
+              },
+              {
+                "food_id": 302,
+                "name": "Vegetarian Burrito Bowl",
+                "image": "https://example.com/images/burrito_bowl.jpg",
+                "rating": 4.5,
+                "description": "A hearty bowl with rice, beans, guacamole, and sautéed veggies.",
+                "price": 9.99,
+                "ingredients": ["rice", "black beans", "avocado", "bell peppers", "corn"],
+                "calories": 550
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category": "Dinner",
+        "category_image": "https://example.com/images/subscription.jpg",
+        "restaurants": [
+          {
+            "restaurant_id": 4,
+            "name": "Evening Bites",
+            "image": "https://example.com/images/evening_bites.jpg",
+            "rating": 4.3,
+            "distance": "5.0 km",
+            "delivery_time": "50-60 mins",
+            "menu": [
+              {
+                "food_id": 401,
+                "name": "BBQ Ribs",
+                "image": "https://example.com/images/bbq_ribs.jpg",
+                "rating": 4.7,
+                "description": "Tender BBQ ribs served with a side of coleslaw and fries.",
+                "price": 15.99,
+                "ingredients": ["pork ribs", "BBQ sauce", "coleslaw", "potato fries"],
+                "calories": 800
+              },
+              {
+                "food_id": 402,
+                "name": "Vegan Stir-Fry",
+                "image": "https://example.com/images/vegan_stir_fry.jpg",
+                "rating": 4.5,
+                "description": "Stir-fried vegetables with tofu, served with rice or noodles.",
+                "price": 12.99,
+                "ingredients": ["tofu", "broccoli", "carrots", "soy sauce", "ginger"],
+                "calories": 400
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category": "Top Offer",
+        "category_image": "https://example.com/images/subscription.jpg",
+        "restaurants": [
+          {
+            "restaurant_id": 5,
+            "name": "Savory Specials",
+            "image": "https://example.com/images/savory_specials.jpg",
+            "rating": 4.9,
+            "distance": "2.0 km",
+            "delivery_time": "25-35 mins",
+            "menu": [
+              {
+                "food_id": 501,
+                "name": "Cheese Burger Combo",
+                "image": "https://example.com/images/cheese_burger.jpg",
+                "rating": 4.8,
+                "description": "Juicy cheeseburger with fries and a drink.",
+                "price": 9.99,
+                "ingredients": ["beef patty", "cheddar cheese", "bun", "lettuce", "tomato"],
+                "calories": 700
+              },
+              {
+                "food_id": 502,
+                "name": "Fried Chicken Bucket",
+                "image": "https://example.com/images/fried_chicken.jpg",
+                "rating": 4.7,
+                "description": "A bucket of crispy fried chicken with a side of mashed potatoes.",
+                "price": 14.99,
+                "ingredients": ["chicken", "batter", "mashed potatoes", "gravy"],
+                "calories": 1000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category": "Other",
+        "category_image": "https://example.com/images/subscription.jpg",
+        "restaurants": [
+          {
+            "restaurant_id": 6,
+            "name": "World Cuisines",
+            "image": "https://example.com/images/world_cuisines.jpg",
+            "rating": 4.6,
+            "distance": "3.5 km",
+            "delivery_time": "45-55 mins",
+            "menu": [
+              {
+                "food_id": 601,
+                "name": "Sushi Platter",
+                "image": "https://example.com/images/sushi_platter.jpg",
+                "rating": 4.9,
+                "description": "Assorted sushi rolls with fresh tuna, salmon, and avocado.",
+                "price": 18.99,
+                "ingredients": ["rice", "seaweed", "tuna", "salmon", "avocado"],
+                "calories": 600
+              },
+              {
+                "food_id": 602,
+                "name": "Spaghetti Carbonara",
+                "image": "https://example.com/images/spaghetti.jpg",
+                "rating": 4.7,
+                "description": "Creamy spaghetti with pancetta, Parmesan cheese, and eggs.",
+                "price": 11.99,
+                "ingredients": ["spaghetti", "pancetta", "eggs", "Parmesan", "black pepper"],
+                "calories": 650
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  
