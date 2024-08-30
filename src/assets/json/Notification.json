@@ -1,0 +1,106 @@
+{
+  "notifications": [
+    {
+      "id": "1",
+      "type": "order_update",
+      "title": "Order Confirmed",
+      "message": "Your order #12345 has been confirmed and is being prepared.",
+      "timestamp": "2024-08-30T14:26:17+05:30",
+      "order_id": "12345",
+      "status": "confirmed",
+      "user": {
+        "user_id": "u001",
+        "name": "John Doe"
+      },
+      "read": false,
+      "priority": "high",
+      "image_url": "https://static.vecteezy.com/system/resources/thumbnails/008/492/236/small/delivery-cartoon-illustration-png.png",
+      "metadata": {
+        "restaurant_name": "Pizza Palace",
+        "estimated_preparation_time": "30 minutes"
+      }
+    },
+    {
+      "id": "2",
+      "type": "order_update",
+      "title": "Order Dispatched",
+      "message": "Your order #12345 is on its way! Track your delivery in real-time.",
+      "timestamp": "2024-08-30T14:45:00+05:30",
+      "order_id": "12345",
+      "status": "dispatched",
+      "user": {
+        "user_id": "u001",
+        "name": "John Doe"
+      },
+      "read": false,
+      "priority": "high",
+      "image_url": "https://img.lovepik.com/element/45012/6199.png_860.png",
+      "delivery_details": {
+        "driver_name": "Alice Smith",
+        "estimated_arrival": "2024-08-30T15:15:00+05:30",
+        "vehicle": "Bike",
+        "contact_number": "+1234567890"
+      },
+      "metadata": {
+        "restaurant_name": "Pizza Palace",
+        "delivery_address": "123 Main St, Springfield"
+      }
+    },
+    {
+      "id": "3",
+      "type": "promotion",
+      "title": "Special Offer!",
+      "message": "Get 20% off on your next order. Use code SAVE20 at checkout.",
+      "timestamp": "2024-08-30T12:00:00+05:30",
+      "promo_code": "SAVE20",
+      "expiry_date": "2024-09-30T23:59:59+05:30",
+      "read": false,
+      "priority": "medium",
+      "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiP2Bk0FNoxd0ZMYRZv9i-X_PUxGTnPXXXEJ2WiFbezpWcsf2aRFM_sIcCDiGPiPYoFNU&usqp=CAU",
+      "metadata": {
+        "terms_and_conditions": "Valid for orders above $20. Cannot be combined with other offers."
+      }
+    },
+    {
+      "id": "4",
+      "type": "general",
+      "title": "New Restaurant Added",
+      "message": "Check out the new restaurant 'Delicious Bites' now available in your area.",
+      "timestamp": "2024-08-29T10:00:00+05:30",
+      "read": true,
+      "priority": "low",
+      "image_url": "https://png.pngtree.com/png-vector/20221012/ourmid/pngtree-fast-food-cafe-building-png-image_6276080.png",
+      "metadata": {
+        "restaurant_id": "r789",
+        "cuisine": "Italian"
+      }
+    },
+    {
+      "id": "5",
+      "type": "order_update",
+      "title": "Order Delivered",
+      "message": "Your order #12345 has been delivered. Enjoy your meal!",
+      "timestamp": "2024-08-30T15:00:00+05:30",
+      "order_id": "12345",
+      "status": "delivered",
+      "user": {
+        "user_id": "u001",
+        "name": "John Doe"
+      },
+      "read": true,
+      "priority": "high",
+      "image_url": "https://png.pngtree.com/png-vector/20240125/ourlarge/pngtree-online-delivery-service-concept-online-order-tracking-png-image_11550461.png",
+      "delivery_details": {
+        "driver_name": "Alice Smith",
+        "delivery_time": "2024-08-30T15:00:00+05:30",
+        "vehicle": "Bike",
+        "contact_number": "+1234567890"
+      },
+      "metadata": {
+        "restaurant_name": "Pizza Palace",
+        "delivery_address": "123 Main St, Springfield",
+        "feedback_link": "https://example.com/feedback/12345"
+      }
+    }
+  ]
+}

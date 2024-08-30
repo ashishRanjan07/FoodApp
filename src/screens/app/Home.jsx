@@ -22,7 +22,6 @@ const Home = () => {
   const [searchText, setSearchText] = useState('');
   const [showAll, setShowAll] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(1);
-  console.log(TopCategory, 'Line 25');
   const visibleCategories = showAll
     ? foodCategories
     : foodCategories.slice(0, 4);
@@ -31,13 +30,12 @@ const Home = () => {
     return (
       <TouchableOpacity style={styles.renderItem}>
         <View>
-          <Image source={item?.image} resizeMode='cover' style={styles.image}/>
+          <Image source={item?.image} resizeMode="cover" style={styles.image} />
         </View>
-        <View style={{paddingHorizontal:responsive(5)}}>
-        <Text style={styles.nameText}>{item?.name}</Text>
-        <Text  style={styles.typeText}>{item?.type}</Text>
+        <View style={{paddingHorizontal: responsive(5)}}>
+          <Text style={styles.nameText}>{item?.name}</Text>
+          <Text style={styles.typeText}>{item?.type}</Text>
         </View>
-        
       </TouchableOpacity>
     );
   };
@@ -51,51 +49,51 @@ const Home = () => {
         onchange={text => setSearchText(text)}
       />
       <ScrollView>
-      <View style={styles.categoryHolder}>
-        <View style={styles.headHolder}>
-          <Text style={styles.text}>Category</Text>
-          <TouchableOpacity onPress={() => setShowAll(!showAll)}>
-            <Text style={[styles.text, {color: AppColor.blue}]}>
-              {showAll ? 'Show Less' : 'See All'}
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.wrapper}>
-          {visibleCategories.map(item => (
-            <TouchableOpacity
-              onPress={() => setSelectedCategory(item.id)}
-              style={[
-                styles.catView,
-                {
-                  backgroundColor:
-                    selectedCategory === item?.id
-                      ? AppColor.success
-                      : AppColor.white,
-                },
-              ]}
-              key={item?.id}>
-              <Image
-                source={item?.image}
-                resizeMode="contain"
-                style={styles.imageStyle}
-              />
-              <Text style={styles.text2}>{item?.name}</Text>
+        <View style={styles.categoryHolder}>
+          <View style={styles.headHolder}>
+            <Text style={styles.text}>Category</Text>
+            <TouchableOpacity onPress={() => setShowAll(!showAll)}>
+              <Text style={[styles.text, {color: AppColor.blue}]}>
+                {showAll ? 'Show Less' : 'See All'}
+              </Text>
             </TouchableOpacity>
-          ))}
+          </View>
+          <View style={styles.wrapper}>
+            {visibleCategories.map(item => (
+              <TouchableOpacity
+                onPress={() => setSelectedCategory(item.id)}
+                style={[
+                  styles.catView,
+                  {
+                    backgroundColor:
+                      selectedCategory === item?.id
+                        ? AppColor.success
+                        : AppColor.white,
+                  },
+                ]}
+                key={item?.id}>
+                <Image
+                  source={item?.image}
+                  resizeMode="contain"
+                  style={styles.imageStyle}
+                />
+                <Text style={styles.text2}>{item?.name}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
         </View>
-      </View>
-      <View style={styles.topCategory}>
-        <Text style={styles.catText}>Top Category</Text>
-        <View style={{alignItems: 'center',flex:1}}>
-          <FlatList
-            data={TopCategory}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-            numColumns={3}
-            showsVerticalScrollIndicator={false}
-          />
+        <View style={styles.topCategory}>
+          <Text style={styles.catText}>Top Category</Text>
+          <View style={{alignItems: 'center', flex: 1}}>
+            <FlatList
+              data={TopCategory}
+              renderItem={renderItem}
+              keyExtractor={item => item.id}
+              numColumns={3}
+              showsVerticalScrollIndicator={false}
+            />
+          </View>
         </View>
-      </View>
       </ScrollView>
     </View>
   );
@@ -161,7 +159,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: AppColor.white,
     // alignItems:'center',
-    flex:1
+    flex: 1,
   },
   catText: {
     fontFamily: 'NotoSans-Medium',
@@ -177,22 +175,22 @@ const styles = StyleSheet.create({
     borderRadius: responsive(10),
     overflow: 'hidden',
     borderColor: '#F8F6F4',
-    gap:responsive(5)
+    gap: responsive(5),
   },
-  image:{
-    height:responsive(150),
-    width:'100%'
+  image: {
+    height: responsive(150),
+    width: '100%',
   },
-  nameText:{
-    width:'100%',
-    height:responsive(25),
-    color:AppColor.black,
-    fontSize:responsive(16),
-    fontFamily:'NotoSans-Medium'
+  nameText: {
+    width: '100%',
+    height: responsive(25),
+    color: AppColor.black,
+    fontSize: responsive(16),
+    fontFamily: 'NotoSans-Medium',
   },
-  typeText:{
-    fontFamily:'NotoSans-Medium',
-    color:AppColor.red,
-    fontSize:responsive(16),
-  }
+  typeText: {
+    fontFamily: 'NotoSans-Medium',
+    color: AppColor.red,
+    fontSize: responsive(16),
+  },
 });
