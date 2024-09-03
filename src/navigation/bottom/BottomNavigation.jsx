@@ -10,6 +10,7 @@ import Notification from '../../screens/app/Notification';
 import Cart from '../../screens/app/Cart';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Search from '../../screens/app/Search';
 const Tab = createMaterialBottomTabNavigator();
 const BottomNavigation = () => {
   return (
@@ -31,13 +32,13 @@ const BottomNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Cart"
-        component={Cart}
+        name="Search"
+        component={Search}
         options={{
-          tabBarLabel: 'Cart',
+          tabBarLabel: 'Search',
           tabBarIcon: ({color}) => (
-            <MaterialCommunityIcons
-              name="cart"
+            <MaterialIcons
+              name="search"
               color={color}
               size={responsive(26)}
             />
