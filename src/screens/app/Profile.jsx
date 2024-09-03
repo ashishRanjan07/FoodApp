@@ -21,9 +21,13 @@ import {useNavigation} from '@react-navigation/native';
 import CustomButton from '../../components/CustomButton';
 import CustomBottomModel from '../../components/CustomBottomModel';
 import {WebView} from 'react-native-webview';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useDispatch} from 'react-redux';
+import {login, saveData} from '../../redux/action/Action';
 
 const Profile = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [notificationModalShow, setShowNotificationModal] = useState(false);
   const [isNotificationEnable, setIsNotificationEnabled] = useState(true);
@@ -31,9 +35,15 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showAboutUsModal, setShowAboutUsModal] = useState(false);
 
-  const handleLogout = async () => {
+  const handleHideLogout = async () => {
     console.log('Clicked on the Logout button');
     setShowLogoutModal(!showLogoutModal);
+  };
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem('isLoggedIn');
+    dispatch(login('No'));
+    dispatch(saveData('No'));
+    handleHideLogout();
   };
 
   const handleShowNotificationModal = () => {
@@ -130,7 +140,7 @@ const Profile = () => {
             Icon={Feather}
             IconName={'log-out'}
             title={'Logout'}
-            handleAction={handleLogout}
+            handleAction={handleHideLogout}
           />
         </View>
         <Text style={styles.versionText}>V.{DeviceInfo.getVersion()}</Text>
@@ -141,10 +151,12 @@ const Profile = () => {
         animationType="slide"
         visible={showLogoutModal}
         statusBarTranslucent
-        onRequestClose={handleLogout}>
+        onRequestClose={handleHideLogout}>
         <View style={styles.overlay}>
-          <View style={styles.modalContainer}>
-            <TouchableOpacity style={styles.closeButton} onPress={handleLogout}>
+          <View style={[styles.modalContainer, {flex: 0}]}>
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={handleHideLogout}>
               <Feather name="x" size={responsive(25)} color={AppColor.black} />
             </TouchableOpacity>
             <Text style={styles.messageText}>Are you sure want to logout?</Text>
@@ -152,16 +164,13 @@ const Profile = () => {
               title={'Yes'}
               color={AppColor.red}
               textColor={AppColor.white}
-              handleAction={() => {
-                // navigation.navigate('Login');
-                console.log('Clicked on the logout button');
-              }}
+              handleAction={handleLogout}
             />
             <CustomButton
               title={'No'}
               color={AppColor.yellow}
               textColor={AppColor.white}
-              handleAction={handleLogout}
+              handleAction={handleHideLogout}
             />
           </View>
         </View>

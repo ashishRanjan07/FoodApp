@@ -27,5 +27,6 @@ const styles = StyleSheet.create({
     fontSize: responsive(18),
     fontFamily: 'NotoSans-Medium',
     letterSpacing: responsive(1),
+    textAlign:'center'
   },
 });
