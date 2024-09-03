@@ -12,8 +12,9 @@ import CustomHeader from '../../components/CustomHeader';
 import {useNavigation} from '@react-navigation/native';
 import UpperHeader from '../../components/Home/UpperHeader';
 import {responsive} from '../../utils/Responsive';
-import Search from '../../components/Home/Search';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import HomeSearch from '../../components/Home/HomeSearch';
+
 const RestaurantFoodList = ({route}) => {
   const navigation = useNavigation();
   const {item, date} = route.params;
@@ -81,7 +82,7 @@ const RestaurantFoodList = ({route}) => {
   };
 
   const handleCartClicked = () => {
-    navigation.navigate('Cart', {cartItems,item,date});
+    navigation.navigate('Cart', {cartItems, item, date});
   };
 
   const staticImageUrl = 'https://picsum.photos/200/300';
@@ -140,7 +141,7 @@ const RestaurantFoodList = ({route}) => {
     <View style={styles.main}>
       <CustomHeader title={item?.Restaurant_Name} />
       <UpperHeader />
-      <Search
+      <HomeSearch
         placeholder={`Search “food from ${item?.Restaurant_Name}”`}
         value={searchText}
         onchange={text => setSearchText(text)}

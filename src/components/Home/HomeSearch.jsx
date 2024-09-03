@@ -3,27 +3,28 @@ import React from 'react'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { responsive } from '../../utils/Responsive';
 import { AppColor } from '../../utils/AppColor';
-const Search = ({placeholder,value,onchange}) => {
-  return (
-    <View style={styles.searchBoxHolder}>
-        <MaterialIcons
-          name="search"
-          size={responsive(30)}
-          color={AppColor.borderColor}
-        />
-        <TextInput
-          placeholder={placeholder}
-          placeholderTextColor={AppColor.borderColor}
-          value={value}
-          onChangeText={onchange}
-          keyboardType="default"
-          style={styles.textInput}
-        />
-      </View>
-  )
-}
 
-export default Search
+const HomeSearch = ({placeholder,value,onchange}) => {
+    return (
+      <View style={styles.searchBoxHolder}>
+          <MaterialIcons
+            name="search"
+            size={responsive(30)}
+            color={AppColor.borderColor}
+          />
+          <TextInput
+            placeholder={placeholder}
+            placeholderTextColor={AppColor.borderColor}
+            value={value}
+            onChangeText={onchange}
+            keyboardType="default"
+            style={styles.textInput}
+          />
+        </View>
+    )
+  }
+
+export default HomeSearch
 
 const styles = StyleSheet.create({searchBoxHolder: {
     borderWidth: 2,

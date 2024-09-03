@@ -7,6 +7,7 @@ import CalendarScreen from '../../screens/app/CalendarScreen';
 import RestaurantList from '../../screens/app/RestaurantList';
 import RestaurantFoodList from '../../screens/app/RestaurantFoodList';
 import CartPage from '../../screens/app/CartPage';
+import FoodDetails from '../../components/search/FoodDetails';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +42,11 @@ const AppStack = () => {
        <Stack.Screen
         name="Cart"
         component={CartPage}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Food Details"
+        component={FoodDetails}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
