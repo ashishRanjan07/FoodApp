@@ -2,6 +2,7 @@ import {
   FlatList,
   Image,
   ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   TextInput,
@@ -17,8 +18,10 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Search from '../../components/Home/Search';
 import foodCategories from '../../assets/json/Category';
 import TopCategory from '../../assets/json/TopCategory';
+import { useNavigation } from '@react-navigation/native';
 
 const Home = () => {
+  const navigation = useNavigation();
   const [searchText, setSearchText] = useState('');
   const [showAll, setShowAll] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(1);
@@ -28,7 +31,7 @@ const Home = () => {
 
   const renderItem = ({item}) => {
     return (
-      <TouchableOpacity style={styles.renderItem}>
+      <TouchableOpacity style={styles.renderItem} onPress={()=>navigation.navigate('Calendar',{item:item})}>
         <View>
           <Image source={item?.image} resizeMode="cover" style={styles.image} />
         </View>
@@ -42,6 +45,7 @@ const Home = () => {
 
   return (
     <View style={styles.main}>
+      <StatusBar backgroundColor={AppColor.yellow} barStyle={"dark-content"}/>
       <UpperHeader />
       <Search
         placeholder={'Search “Rajma Chawal near you”'}

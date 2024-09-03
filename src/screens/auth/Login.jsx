@@ -7,22 +7,34 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  Animated
+  Animated,
 } from 'react-native';
-import React, {useState,useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {AppColor} from '../../utils/AppColor';
 import {ImagePath} from '../../utils/ImagePath';
 import {responsive} from '../../utils/Responsive';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Toast from 'react-native-toast-message';
 import CustomButton from '../../components/CustomButton';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import {showToast} from '../../utils/ToastHelper';
+import {BallIndicator} from 'react-native-indicators';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useDispatch, useSelector} from 'react-redux';
+import { login, saveData } from '../../redux/action/Action';
+
 
 const Login = () => {
-  const navigation =useNavigation();
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
   const [userId, setUserId] = useState('');
   const [password, setUserPassword] = useState('');
   const [showPassword, setShowPassword] = useState(true);
+  const [userIdError, setUserIdError] = useState(null);
+  const [showPasswordError, setShowPasswordError] = useState(null);
+  const [loginError, setLoginError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const positionAnim = useRef(new Animated.ValueXY({x: 0, y: -250})).current;
 
   useEffect(() => {
@@ -33,6 +45,69 @@ const Login = () => {
     }).start();
   }, []);
 
+  useEffect(() => {
+    if (userId.length > 0) {
+      setUserIdError('');
+    }
+    if (password.length > 0) {
+      setShowPasswordError('');
+    }
+  }, [userId, password]);
+
+  const userIdRegExp = /[A-Z]/;
+  const handleLogin = async () => {
+    if (userId.length === 0 && password.length === 0) {
+      setUserIdError('Please Enter User Id');
+      setShowPasswordError('Please Enter Password');
+      return;
+    }
+    if (userId.trim() === '') {
+      setUserIdError('Please Enter User Id');
+      return;
+    }
+    if (password.trim() === '') {
+      setShowPasswordError('Please Enter Password');
+      return;
+    }
+    const isUserIdValid = userIdRegExp.test(userId.trim());
+    if (isUserIdValid) {
+      showToast(
+        'error',
+        'UserId Validation Error',
+        'Please use lowercase in UserId',
+      );
+      return;
+    }
+    if (password.length < 6) {
+      showToast(
+        'error',
+        'Password Validation Error',
+        'Minimum 6 digit password required',
+      );
+    }
+    try {
+      setLoading(true);
+     
+      if (userId==='ashish' && password==='test@123') {
+        await AsyncStorage.setItem('isLoggedIn', 'Yes');
+        dispatch(login('Yes'));
+        dispatch(saveData('Yes'));
+        setLoading(false);
+        navigation.navigate('App Stack');
+      } else {
+        setLoading(false);
+        setLoginError('Invalid Credentials');
+      }
+    } catch (error) {
+      showToast(
+        'info',
+        'Try Again',
+        'Something went wrong. Please try again...',
+      );
+    }
+    // navigation.navigate('App Stack');
+  };
+
   return (
     <View style={styles.main}>
       <StatusBar barStyle={'dark-content'} backgroundColor={AppColor.yellow} />
@@ -40,7 +115,11 @@ const Login = () => {
         source={ImagePath.welcome}
         resizeMode="cover"
         style={styles.container}>
-        <Animated.View style={[styles.contentHolder,{transform:positionAnim.getTranslateTransform()}]}>
+        <Animated.View
+          style={[
+            styles.contentHolder,
+            {transform: positionAnim.getTranslateTransform()},
+          ]}>
           <Text style={styles.text}>Login</Text>
           {/* Email id */}
           <View style={styles.box}>
@@ -58,6 +137,11 @@ const Login = () => {
               style={styles.textInputStyle}
             />
           </View>
+          {userIdError && (
+            <View style={styles.errorHolder}>
+              <Text style={{color: AppColor.warning}}>{userIdError}</Text>
+            </View>
+          )}
           {/* Password */}
           <View style={styles.box}>
             <MaterialIcons
@@ -85,21 +169,44 @@ const Login = () => {
               />
             </TouchableOpacity>
           </View>
+          {showPasswordError && (
+            <View style={styles.errorHolder}>
+              <Text style={{color: AppColor.warning}}>{showPasswordError}</Text>
+            </View>
+          )}
           {/* Login Button */}
           <CustomButton
             title={'Login'}
             color={AppColor.yellow}
             textColor={AppColor.white}
-            handleAction={() => navigation.navigate("App Stack")}
+            handleAction={handleLogin}
           />
+          {loginError && (
+            <View style={styles.errorHolder}>
+              <Text style={{color: AppColor.warning}}>{loginError}</Text>
+            </View>
+          )}
           <TouchableOpacity style={styles.textHolder}>
             <Text style={styles.forgetText}>Forget Password?</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.textHolder} onPress={()=> navigation.navigate("Registration")}>
+          <TouchableOpacity
+            style={styles.textHolder}
+            onPress={() => navigation.navigate('Registration')}>
             <Text style={styles.forgetText}>Don't have an account?</Text>
           </TouchableOpacity>
         </Animated.View>
+        <Toast />
+        {loading && (
+        <View style={styles.loaderView}>
+          <View style={styles.loaderContainer}>
+            <BallIndicator color={AppColor.blue} />
+            <Text style={styles.loaderText}>
+              Validating your Credentials please wait...
+            </Text>
+          </View>
+        </View>
+      )}
       </ImageBackground>
     </View>
   );
@@ -160,5 +267,37 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: responsive(5),
     alignSelf: 'center',
+  },
+  errorHolder: {
+    padding: responsive(5),
+    width: '95%',
+    alignSelf: 'center',
+  },
+  loaderText: {
+    fontSize: responsive(18),
+    color: AppColor.blue,
+    textAlign: 'center',
+  },
+  loaderView: {
+    position: 'absolute',
+    borderWidth: 1,
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    padding: responsive(10),
+  },
+  loaderContainer: {
+    gap: responsive(30),
+    borderWidth: 2,
+    width: '90%',
+    alignSelf: 'center',
+    padding: responsive(15),
+    borderRadius: responsive(10),
+    borderColor: AppColor.blue,
+    backgroundColor: AppColor.white,
+    paddingTop: responsive(30),
   },
 });

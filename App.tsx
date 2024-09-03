@@ -4,6 +4,10 @@ import NoInternet from './src/utils/NoInternet';
 import NetInfo from '@react-native-community/netinfo';
 import {NavigationContainer} from '@react-navigation/native';
 import AuthStack from './src/navigation/stack/AuthStack';
+import {Provider} from 'react-redux';
+import store from './src/redux/store/Store';
+import Toast from 'react-native-toast-message';
+import Routes from './src/navigation/routes/Routes';
 
 const App = () => {
   const [isConnected, setIsConnected] = useState(true);
@@ -18,15 +22,18 @@ const App = () => {
   }, []);
 
   return (
-    <View style={{flex: 1}}>
-      {isConnected ? (
-        <NavigationContainer>
-          <AuthStack />
-        </NavigationContainer>
-      ) : (
-        <NoInternet />
-      )}
-    </View>
+    <Provider store={store}>
+      <View style={{flex: 1}}>
+        <Toast />
+        {isConnected ? (
+          <NavigationContainer>
+            <Routes />
+          </NavigationContainer>
+        ) : (
+          <NoInternet />
+        )}
+      </View>
+    </Provider>
   );
 };
 export default App;

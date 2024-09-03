@@ -1,30 +1,31 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { ImagePath } from '../../utils/ImagePath'
-import { responsive } from '../../utils/Responsive'
-import { AppColor } from '../../utils/AppColor'
+import {Image, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {ImagePath} from '../../utils/ImagePath';
+import {responsive} from '../../utils/Responsive';
+import {AppColor} from '../../utils/AppColor';
 
 const UpperHeader = () => {
   return (
     <View style={styles.upperHeaderHolder}>
-    <View style={styles.textHolder}>
-      <Text style={styles.nameText1}>Hello Debjani Sarkar </Text>
-      <Text style={styles.nameText}>What would you like to eat today?</Text>
+      <View style={styles.textHolder}>
+        <Text style={styles.nameText1}>Hello Debjani Sarkar </Text>
+        <Text style={styles.nameText}>What would you like to eat today?</Text>
+      </View>
+      <View style={styles.imageHolder}>
+        <Image
+          source={ImagePath.user}
+          resizeMode="contain"
+          style={styles.imageStyle}
+        />
+      </View>
     </View>
-    <View style={styles.imageHolder}>
-      <Image
-        source={ImagePath.user}
-        resizeMode="contain"
-        style={styles.imageStyle}
-      />
-    </View>
-  </View>
-  )
-}
+  );
+};
 
-export default UpperHeader
+export default UpperHeader;
 
-const styles = StyleSheet.create({ upperHeaderHolder: {
+const styles = StyleSheet.create({
+  upperHeaderHolder: {
     backgroundColor: AppColor.white,
     padding: responsive(10),
     flexDirection: 'row',
