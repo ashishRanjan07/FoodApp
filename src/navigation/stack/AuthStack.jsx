@@ -6,6 +6,7 @@ import Welcome from '../../screens/auth/Welcome';
 import Registration from '../../screens/auth/Registration';
 import Login from '../../screens/auth/Login';
 import AppStack from './AppStack';
+import ForgetPassword from '../../screens/auth/ForgetPassword';
 
 const Stack = createNativeStackNavigator();
 const AuthStack = () => {
@@ -24,6 +25,11 @@ const AuthStack = () => {
       <Stack.Screen
         name="Login"
         component={Login}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ForgetPassword"
+        component={ForgetPassword}
         options={{headerShown: false}}
       />
       <Stack.Screen
