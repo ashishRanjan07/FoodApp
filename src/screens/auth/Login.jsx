@@ -186,7 +186,7 @@ const Login = () => {
               <Text style={{color: AppColor.warning}}>{loginError}</Text>
             </View>
           )}
-          <TouchableOpacity style={styles.textHolder}>
+          <TouchableOpacity style={styles.textHolder} onPress={()=> navigation.navigate('ForgetPassword')}>
             <Text style={styles.forgetText}>Forget Password?</Text>
           </TouchableOpacity>
 
