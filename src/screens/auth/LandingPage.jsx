@@ -11,7 +11,7 @@ const LandingPage = () => {
 
   const handleGetStarted = () => {
     navigation.navigate('Registration');
-  }
+  };
   return (
     <View style={styles.main}>
       <StatusBar backgroundColor={AppColor.white} barStyle={'dark-content'} />
