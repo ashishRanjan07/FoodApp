@@ -15,7 +15,12 @@ const CustomTextInputBox = ({
 }) => {
   return (
     <View style={styles.box}>
-      <Icon name={IconName} size={responsive(30)} color={AppColor.success} style={{paddingHorizontal:responsive(5)}}/>
+      <Icon
+        name={IconName}
+        size={responsive(30)}
+        color={AppColor.success}
+        style={{paddingHorizontal: responsive(5)}}
+      />
       <TextInput
         placeholder={placeholder}
         placeholderTextColor={AppColor.success}
@@ -47,7 +52,7 @@ const styles = StyleSheet.create({
     width: '90%',
     paddingHorizontal: responsive(10),
     fontFamily: 'NotoSans-Medium',
-    color: AppColor.black,
+    color: AppColor.success,
     fontSize: responsive(18),
   },
 });

@@ -7,7 +7,8 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  Animated,
+  KeyboardAvoidingView,
+  ScrollView,
 } from 'react-native';
 import React, {useState, useRef, useEffect} from 'react';
 import {AppColor} from '../../utils/AppColor';
@@ -22,8 +23,8 @@ import {showToast} from '../../utils/ToastHelper';
 import {BallIndicator} from 'react-native-indicators';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch, useSelector} from 'react-redux';
-import { login, saveData } from '../../redux/action/Action';
-
+import {login, saveData} from '../../redux/action/Action';
+import CustomTextInputBox from '../../components/CustomTextInputBox';
 
 const Login = () => {
   const navigation = useNavigation();
@@ -35,15 +36,6 @@ const Login = () => {
   const [showPasswordError, setShowPasswordError] = useState(null);
   const [loginError, setLoginError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const positionAnim = useRef(new Animated.ValueXY({x: 0, y: -250})).current;
-
-  useEffect(() => {
-    Animated.timing(positionAnim, {
-      toValue: {x: 0, y: 0},
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
-  }, []);
 
   useEffect(() => {
     if (userId.length > 0) {
@@ -87,8 +79,8 @@ const Login = () => {
     }
     try {
       setLoading(true);
-     
-      if (userId==='ashish' && password==='test@123') {
+
+      if (userId === 'ashish' && password === 'test@123') {
         await AsyncStorage.setItem('isLoggedIn', 'Yes');
         dispatch(login('Yes'));
         dispatch(saveData('Yes'));
@@ -109,95 +101,104 @@ const Login = () => {
   };
 
   return (
-    <View style={styles.main}>
-      <StatusBar barStyle={'dark-content'} backgroundColor={AppColor.yellow} />
-      <ImageBackground
-        source={ImagePath.welcome}
-        resizeMode="cover"
-        style={styles.container}>
-        <Animated.View
-          style={[
-            styles.contentHolder,
-            {transform: positionAnim.getTranslateTransform()},
-          ]}>
-          <Text style={styles.text}>Login</Text>
-          {/* Email id */}
-          <View style={styles.box}>
-            <Feather
-              name="user"
-              size={responsive(30)}
-              color={AppColor.success}
-            />
-            <TextInput
-              placeholder="Users Id"
-              placeholderTextColor={AppColor.black}
+    <>
+      <ScrollView style={styles.main}>
+        <StatusBar backgroundColor={AppColor.white} barStyle={'dark-content'} />
+        <View style={styles.imageHolder}>
+          <Image
+            source={ImagePath.login1}
+            resizeMode="cover"
+            style={styles.imageStyle}
+          />
+        </View>
+        <View style={styles.borderOne} />
+        <View
+          style={[styles.borderOne, {backgroundColor: '#ebf6f0', zIndex: -1}]}
+        />
+        {/*Form Holder */}
+        <KeyboardAvoidingView style={{marginTop: responsive(20)}}>
+          <View
+            style={{
+              width: '85%',
+              alignSelf: 'center',
+              alignItems: 'center',
+              gap: responsive(10),
+            }}>
+            <CustomTextInputBox
+              Icon={Feather}
+              IconName={'user'}
+              placeholder={'Enter Email/ Mobile'}
               value={userId}
               onChangeText={text => setUserId(text)}
-              keyboardType="default"
-              style={styles.textInputStyle}
+              keyboardType={'default'}
             />
-          </View>
-          {userIdError && (
-            <View style={styles.errorHolder}>
-              <Text style={{color: AppColor.warning}}>{userIdError}</Text>
-            </View>
-          )}
-          {/* Password */}
-          <View style={styles.box}>
-            <MaterialIcons
-              name="lock-outline"
-              size={responsive(30)}
-              color={AppColor.success}
-            />
-            <TextInput
-              placeholder="Password"
-              placeholderTextColor={AppColor.black}
-              value={password}
-              onChangeText={text => setUserPassword(text)}
-              keyboardType="default"
-              style={[styles.textInputStyle, {width: '80%'}]}
-              secureTextEntry={showPassword}
-            />
-            <TouchableOpacity
-              onPress={() => {
-                setShowPassword(!showPassword);
-              }}>
-              <Feather
-                name={showPassword ? 'eye-off' : 'eye'}
+            {userIdError && (
+              <View style={styles.errorHolder}>
+                <Text style={{color: AppColor.warning}}>{userIdError}</Text>
+              </View>
+            )}
+            <View style={styles.box}>
+              <MaterialIcons
+                name="lock-outline"
                 size={responsive(30)}
                 color={AppColor.success}
               />
+              <TextInput
+                placeholder="Password"
+                placeholderTextColor={AppColor.success}
+                value={password}
+                onChangeText={text => setUserPassword(text)}
+                keyboardType="default"
+                style={[styles.textInputStyle, {width: '80%'}]}
+                secureTextEntry={showPassword}
+              />
+              <TouchableOpacity
+                onPress={() => {
+                  setShowPassword(!showPassword);
+                }}>
+                <Feather
+                  name={showPassword ? 'eye-off' : 'eye'}
+                  size={responsive(30)}
+                  color={AppColor.success}
+                />
+              </TouchableOpacity>
+            </View>
+            {showPasswordError && (
+              <View style={styles.errorHolder}>
+                <Text style={{color: AppColor.warning}}>
+                  {showPasswordError}
+                </Text>
+              </View>
+            )}
+            {/* Login Button */}
+            <View style={{width: '100%'}}>
+              <CustomButton
+                title={'Login'}
+                color={AppColor.yellow}
+                textColor={AppColor.white}
+                handleAction={handleLogin}
+              />
+              {loginError && (
+                <View style={styles.errorHolder}>
+                  <Text style={{color: AppColor.warning}}>{loginError}</Text>
+                </View>
+              )}
+            </View>
+            <TouchableOpacity
+              style={styles.textHolder}
+              onPress={() => navigation.navigate('Registration')}>
+              <Text style={styles.forgetText}>Don't have an account?</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.textHolder}
+              onPress={() => navigation.navigate('ForgetPassword')}>
+              <Text style={styles.forgetText}>Forget Password?</Text>
             </TouchableOpacity>
           </View>
-          {showPasswordError && (
-            <View style={styles.errorHolder}>
-              <Text style={{color: AppColor.warning}}>{showPasswordError}</Text>
-            </View>
-          )}
-          {/* Login Button */}
-          <CustomButton
-            title={'Login'}
-            color={AppColor.yellow}
-            textColor={AppColor.white}
-            handleAction={handleLogin}
-          />
-          {loginError && (
-            <View style={styles.errorHolder}>
-              <Text style={{color: AppColor.warning}}>{loginError}</Text>
-            </View>
-          )}
-          <TouchableOpacity style={styles.textHolder} onPress={()=> navigation.navigate('ForgetPassword')}>
-            <Text style={styles.forgetText}>Forget Password?</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.textHolder}
-            onPress={() => navigation.navigate('Registration')}>
-            <Text style={styles.forgetText}>Don't have an account?</Text>
-          </TouchableOpacity>
-        </Animated.View>
-        <Toast />
-        {loading && (
+        </KeyboardAvoidingView>
+      </ScrollView>
+      {loading && (
         <View style={styles.loaderView}>
           <View style={styles.loaderContainer}>
             <BallIndicator color={AppColor.blue} />
@@ -207,8 +208,8 @@ const Login = () => {
           </View>
         </View>
       )}
-      </ImageBackground>
-    </View>
+      <Toast />
+    </>
   );
 };
 
@@ -218,6 +219,22 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: AppColor.white,
+  },
+  imageHolder: {
+    zIndex: 1,
+  },
+  imageStyle: {
+    height: responsive(500),
+    width: '100%',
+    borderBottomLeftRadius: responsive(80),
+    borderBottomRightRadius: responsive(80),
+  },
+  borderOne: {
+    height: responsive(150),
+    marginTop: -100,
+    borderRadius: 50,
+    backgroundColor: '#edeac8',
+    zIndex: 0,
   },
   container: {
     justifyContent: 'center',
@@ -245,16 +262,17 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     padding: responsive(10),
     borderRadius: responsive(5),
-    borderColor: AppColor.success,
+    borderColor: '#AFE1AF',
     flexDirection: 'row',
     gap: responsive(5),
     alignItems: 'center',
+    backgroundColor: '#AFE1AF',
   },
   textInputStyle: {
     width: '90%',
     paddingHorizontal: responsive(10),
     fontFamily: 'NotoSans-Medium',
-    color: AppColor.black,
+    color: AppColor.success,
     fontSize: responsive(18),
   },
   forgetText: {
