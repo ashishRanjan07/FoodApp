@@ -11,14 +11,14 @@ const CustomTextInputBox = ({
   onChangeText,
   keyboardType,
   maxLength,
-  secureText
+  secureText,
 }) => {
   return (
     <View style={styles.box}>
-      <Icon name={IconName} size={responsive(30)} color={AppColor.success} />
+      <Icon name={IconName} size={responsive(30)} color={AppColor.success} style={{paddingHorizontal:responsive(5)}}/>
       <TextInput
         placeholder={placeholder}
-        placeholderTextColor={AppColor.black}
+        placeholderTextColor={AppColor.success}
         value={value}
         onChangeText={onChangeText}
         keyboardType={keyboardType}
@@ -35,12 +35,13 @@ export default CustomTextInputBox;
 const styles = StyleSheet.create({
   box: {
     borderWidth: 2,
-    padding: responsive(10),
-    borderRadius: responsive(5),
-    borderColor: AppColor.success,
+    padding: responsive(5),
+    borderRadius: responsive(10),
+    borderColor: '#AFE1AF',
     flexDirection: 'row',
     gap: responsive(5),
     alignItems: 'center',
+    backgroundColor: '#AFE1AF',
   },
   textInputStyle: {
     width: '90%',

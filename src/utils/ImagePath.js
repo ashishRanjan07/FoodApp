@@ -1,5 +1,8 @@
 export const ImagePath = {
   landing: require('../assets/image/landing.jpg'),
+  registration1: require('../assets/image/registration1.jpg'),
+  registration2: require('../assets/image/registration2.jpg'),
+  registration3: require('../assets/image/registration3.jpg'),
   logo: require('../assets/image/logo.png'),
   noInternet: require('../assets/image/noInternet.jpg'),
   welcome: require('../assets/image/welcome.jpg'),
