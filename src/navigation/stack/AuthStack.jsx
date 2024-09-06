@@ -7,11 +7,17 @@ import Registration from '../../screens/auth/Registration';
 import Login from '../../screens/auth/Login';
 import AppStack from './AppStack';
 import ForgetPassword from '../../screens/auth/ForgetPassword';
+import LandingPage from '../../screens/auth/LandingPage';
 
 const Stack = createNativeStackNavigator();
 const AuthStack = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="Landing Page"
+        component={LandingPage}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="Welcome"
         component={Welcome}

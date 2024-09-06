@@ -16,7 +16,7 @@ import CustomButton from '../../components/CustomButton';
 import CustomTextInputBox from '../../components/CustomTextInputBox';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Toast from 'react-native-toast-message';
-import { responsive } from '../../utils/Responsive';
+import {responsive} from '../../utils/Responsive';
 const ForgetPassword = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
@@ -201,102 +201,112 @@ const ForgetPassword = () => {
         source={ImagePath.welcome}
         resizeMode="cover"
         style={styles.container}>
-        <View style={styles.formHolder}>
-          {step === 1 && (
-            <>
-              <CustomTextInputBox
-                Icon={MaterialIcons}
-                IconName={'email'}
-                placeholder={'User Id'}
-                value={email}
-                onChangeText={text => setEmail(text)}
-                keyboardType={'email-address'}
-              />
-              {emailError && (
-                <View style={styles.errorHolder}>
-                  <Text style={{color: AppColor.warning}}>{emailError}</Text>
-                </View>
-              )}
-              <CustomButton
-                title={'Submit'}
-                color={AppColor.primary}
-                handleAction={handleSubmit}
-                textColor={AppColor.white}
-              />
-            </>
-          )}
-          {step === 2 && (
-            <>
-              <CustomTextInputBox
-                Icon={MaterialIcons}
-                IconName={'password'}
-                placeholder={'OTP'}
-                value={otp}
-                onChangeText={text => setOtp(text)}
-                keyboardType={'number-pad'}
-                maxLength={4}
-              />
-              {otpError && (
-                <View style={styles.errorHolder}>
-                  <Text style={{color: AppColor.warning}}>{otpError}</Text>
-                </View>
-              )}
-              <CustomButton
-                title={'Verify OTP'}
-                color={AppColor.primary}
-                textColor={AppColor.white}
-                handleAction={handleVerifyOtp}
-              />
-            </>
-          )}
-          {step === 3 && (
-            <>
-              <CustomTextInputBox
-                Icon={MaterialIcons}
-                IconName={'lock-outline'}
-                placeholder={'New Password*'}
-                value={newPassword}
-                onChangeText={text => setNewPassword(text)}
-                keyboardType={'default'}
-              />
-              {newPasswordError && (
-                <View style={styles.errorHolder}>
-                  <Text style={{color: AppColor.warning}}>
-                    {newPasswordError}
-                  </Text>
-                </View>
-              )}
-              <CustomTextInputBox
-                Icon={MaterialIcons}
-                IconName={'lock-outline'}
-                placeholder={'Confirm New Password*'}
-                value={confirmNewPassword}
-                onChangeText={text => setConfirmNewPassword(text)}
-                keyboardType={'default'}
-              />
-              {confirmNewPasswordError && (
-                <View style={styles.errorHolder}>
-                  <Text style={{color: AppColor.warning}}>
-                    {confirmNewPasswordError}
-                  </Text>
-                </View>
-              )}
-              <CustomButton
-                title={'Update Password'}
-                color={AppColor.primary}
-                handleAction={handleUpdatePassword}
-                textColor={AppColor.white}
-              />
-            </>
-          )}
-        </View>
+        <View
+          style={{
+            backgroundColor: AppColor.white,
+            width: '95%',
+            alignItems: 'center',
+            padding: responsive(20),
+            borderRadius: responsive(10),
+            elevation: responsive(10),
+          }}>
+          <View style={styles.formHolder}>
+            {step === 1 && (
+              <>
+                <CustomTextInputBox
+                  Icon={MaterialIcons}
+                  IconName={'email'}
+                  placeholder={'User Id'}
+                  value={email}
+                  onChangeText={text => setEmail(text)}
+                  keyboardType={'email-address'}
+                />
+                {emailError && (
+                  <View style={styles.errorHolder}>
+                    <Text style={{color: AppColor.warning}}>{emailError}</Text>
+                  </View>
+                )}
+                <CustomButton
+                  title={'Submit'}
+                  color={AppColor.primary}
+                  handleAction={handleSubmit}
+                  textColor={AppColor.white}
+                />
+              </>
+            )}
+            {step === 2 && (
+              <>
+                <CustomTextInputBox
+                  Icon={MaterialIcons}
+                  IconName={'password'}
+                  placeholder={'OTP'}
+                  value={otp}
+                  onChangeText={text => setOtp(text)}
+                  keyboardType={'number-pad'}
+                  maxLength={4}
+                />
+                {otpError && (
+                  <View style={styles.errorHolder}>
+                    <Text style={{color: AppColor.warning}}>{otpError}</Text>
+                  </View>
+                )}
+                <CustomButton
+                  title={'Verify OTP'}
+                  color={AppColor.primary}
+                  textColor={AppColor.white}
+                  handleAction={handleVerifyOtp}
+                />
+              </>
+            )}
+            {step === 3 && (
+              <>
+                <CustomTextInputBox
+                  Icon={MaterialIcons}
+                  IconName={'lock-outline'}
+                  placeholder={'New Password*'}
+                  value={newPassword}
+                  onChangeText={text => setNewPassword(text)}
+                  keyboardType={'default'}
+                />
+                {newPasswordError && (
+                  <View style={styles.errorHolder}>
+                    <Text style={{color: AppColor.warning}}>
+                      {newPasswordError}
+                    </Text>
+                  </View>
+                )}
+                <CustomTextInputBox
+                  Icon={MaterialIcons}
+                  IconName={'lock-outline'}
+                  placeholder={'Confirm New Password*'}
+                  value={confirmNewPassword}
+                  onChangeText={text => setConfirmNewPassword(text)}
+                  keyboardType={'default'}
+                />
+                {confirmNewPasswordError && (
+                  <View style={styles.errorHolder}>
+                    <Text style={{color: AppColor.warning}}>
+                      {confirmNewPasswordError}
+                    </Text>
+                  </View>
+                )}
+                <CustomButton
+                  title={'Update Password'}
+                  color={AppColor.primary}
+                  handleAction={handleUpdatePassword}
+                  textColor={AppColor.white}
+                />
+              </>
+            )}
+          </View>
 
-        {/* Back to login */}
-        <TouchableOpacity
-          style={styles.newUserHolder}
-          onPress={handleBackToLogin}>
-          <Text style={styles.label}>Back to Login</Text>
-        </TouchableOpacity>
+          {/* Back to login */}
+          <TouchableOpacity
+            style={styles.newUserHolder}
+            onPress={handleBackToLogin}>
+            <Text style={styles.label}>Back to Login</Text>
+          </TouchableOpacity>
+        </View>
         {loading && (
           <View style={styles.loaderView}>
             <View style={styles.loaderContainer}>
@@ -324,12 +334,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-  },imageStyle: {
+  },
+  imageStyle: {
     width: '75%',
     height: responsive(150),
   },
   formHolder: {
-    width: '90%',
+    width: '95%',
     gap: responsive(10),
   },
   errorHolder: {
@@ -340,7 +351,6 @@ const styles = StyleSheet.create({
   newUserHolder: {
     padding: responsive(10),
     alignItems: 'center',
-    marginBottom: responsive(10),
   },
   label: {
     fontSize: responsive(18),
