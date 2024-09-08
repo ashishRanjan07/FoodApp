@@ -54,8 +54,8 @@ const Home = () => {
         value={searchText}
         onchange={text => setSearchText(text)}
       />
-      <ScrollView>
-        <View style={styles.categoryHolder}>
+
+      {/* <View style={styles.categoryHolder}>
           <View style={styles.headHolder}>
             <Text style={styles.text}>Category</Text>
             <TouchableOpacity onPress={() => setShowAll(!showAll)}>
@@ -87,20 +87,19 @@ const Home = () => {
               </TouchableOpacity>
             ))}
           </View>
+        </View> */}
+      <View style={styles.topCategory}>
+        <Text style={styles.catText}>Top Category</Text>
+        <View style={{alignItems: 'center', flex: 1}}>
+          <FlatList
+            data={TopCategory}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+            numColumns={2}
+            showsVerticalScrollIndicator={false}
+          />
         </View>
-        <View style={styles.topCategory}>
-          <Text style={styles.catText}>Top Category</Text>
-          <View style={{alignItems: 'center', flex: 1}}>
-            <FlatList
-              data={TopCategory}
-              renderItem={renderItem}
-              keyExtractor={item => item.id}
-              numColumns={3}
-              showsVerticalScrollIndicator={false}
-            />
-          </View>
-        </View>
-      </ScrollView>
+      </View>
     </View>
   );
 };
@@ -160,11 +159,10 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   topCategory: {
-    // borderWidth: 2,
+    marginVertical: responsive(10),
     width: '95%',
     alignSelf: 'center',
     backgroundColor: AppColor.white,
-    // alignItems:'center',
     flex: 1,
   },
   catText: {
@@ -172,10 +170,11 @@ const styles = StyleSheet.create({
     color: AppColor.black,
     fontSize: responsive(18),
     paddingHorizontal: responsive(10),
+    marginVertical: responsive(10),
   },
   renderItem: {
     borderWidth: 2,
-    width: responsive(125),
+    width: '48%',
     margin: responsive(5),
     backgroundColor: '#F8F6F4',
     borderRadius: responsive(10),

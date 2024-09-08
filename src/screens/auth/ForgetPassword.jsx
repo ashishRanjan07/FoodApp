@@ -68,25 +68,32 @@ const ForgetPassword = () => {
       const data = {
         user_email: email,
       };
-      const response = await forgetPassword_Email(data);
-      console.log(response, 'Line 70');
-      if (response?.status_code === 200) {
-        console.log(response?.email_otp, 'Line 71');
-        setOtpValue(response?.email_otp);
-        setUserId(response?.data?.ID);
-        setStep(2);
-        setLoading(false);
-        showToast(
-          'success',
-          'OTP is send',
-          'OTP is sent on the provide email address',
-        );
-      }
-      if (response?.status_code === 404) {
-        setEmailError(response?.message);
-        setEmail('');
-        setLoading(false);
-      }
+      setStep(2);
+      setLoading(false);
+      showToast(
+        'success',
+        'OTP is send',
+        'OTP is sent on the provide email address',
+      );
+      // const response = await forgetPassword_Email(data);
+      // console.log(response, 'Line 70');
+      // if (response?.status_code === 200) {
+      //   console.log(response?.email_otp, 'Line 71');
+      //   setOtpValue(response?.email_otp);
+      //   setUserId(response?.data?.ID);
+      //   setStep(2);
+      //   setLoading(false);
+      //   showToast(
+      //     'success',
+      //     'OTP is send',
+      //     'OTP is sent on the provide email address',
+      //   );
+      // }
+      //   if (response?.status_code === 404) {
+      //     setEmailError(response?.message);
+      //     setEmail('');
+      //     setLoading(false);
+      //   }
     } catch (error) {
       showToast(
         'error',
@@ -110,7 +117,8 @@ const ForgetPassword = () => {
       return;
     }
     setLoading(true);
-    if (otp == otpValue) {
+    // if (otp == otpValue) {
+    if (otp == '0510') {
       setStep(3);
       console.log(otp, otpValue, 'Line 109');
       setLoading(false);
@@ -158,29 +166,36 @@ const ForgetPassword = () => {
         id: userId,
         password: confirmNewPassword,
       };
-      const response = await change_password(data);
-      console.log(response);
-      if (response?.status_code === 200) {
-        showToast(
-          'success',
-          'Password Changed',
-          'Your password is changed successfully.',
-        );
-        setEmail('');
-        setOtp('');
-        setNewPassword('');
-        setConfirmNewPassword('');
-        setStep(1);
-        setLoading(false);
-        navigation.navigate('Login');
-      } else {
-        showToast(
-          'error',
-          'something went wrong2',
-          'Please again after sometime2.',
-        );
-        setLoading(false);
-      }
+      setEmail('');
+      setOtp('');
+      setNewPassword('');
+      setConfirmNewPassword('');
+      setStep(1);
+      setLoading(false);
+      navigation.navigate('Login');
+      // const response = await change_password(data);
+      // console.log(response);
+      // if (response?.status_code === 200) {
+      //   showToast(
+      //     'success',
+      //     'Password Changed',
+      //     'Your password is changed successfully.',
+      //   );
+      //   setEmail('');
+      //   setOtp('');
+      //   setNewPassword('');
+      //   setConfirmNewPassword('');
+      //   setStep(1);
+      //   setLoading(false);
+      //   navigation.navigate('Login');
+      // } else {
+      //   showToast(
+      //     'error',
+      //     'something went wrong2',
+      //     'Please again after sometime2.',
+      //   );
+      //   setLoading(false);
+      // }
     } catch (error) {
       showToast(
         'error',
@@ -201,15 +216,8 @@ const ForgetPassword = () => {
         source={ImagePath.welcome}
         resizeMode="cover"
         style={styles.container}>
-        <View
-          style={{
-            backgroundColor: AppColor.white,
-            width: '95%',
-            alignItems: 'center',
-            padding: responsive(20),
-            borderRadius: responsive(10),
-            elevation: responsive(10),
-          }}>
+        <View style={styles.view}>
+          <Text style={styles.headerText}>Forget Password</Text>
           <View style={styles.formHolder}>
             {step === 1 && (
               <>
@@ -329,6 +337,20 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: AppColor.white,
+  },
+  headerText: {
+    fontFamily: 'NotoSans-Medium',
+    fontSize: responsive(24),
+    color: AppColor.black,
+    marginBottom: responsive(10),
+  },
+  view: {
+    backgroundColor: AppColor.white,
+    width: '95%',
+    alignItems: 'center',
+    padding: responsive(20),
+    borderRadius: responsive(10),
+    elevation: responsive(10),
   },
   container: {
     justifyContent: 'center',

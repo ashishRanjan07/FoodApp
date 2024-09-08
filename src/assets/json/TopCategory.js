@@ -3,20 +3,20 @@ import {ImagePath} from '../../utils/ImagePath';
 const TopCategory = [
   {
     id: 1,
-    name: 'Home Cooked ',
-    type:'Pre Order',
+    name: 'Home Cooked Food ',
+    type:'Regular Meal Service',
     image: ImagePath.f1,
   },
   {
     id: 2,
-    name: 'Regular Meal Service',
-    type:'Subscription',
+    name: 'Authentic Specialties',
+    type:'Advance Ordering',
     image: ImagePath.f2,
   },
   {
     id: 3,
     name: 'Weekend Party Order',
-    type:'Advance',
+    type:'Pre Order',
     image: ImagePath.f3,
   },
   {
@@ -51,7 +51,7 @@ const TopCategory = [
   },
   {
     id: 9,
-    name: 'Weekend Special Kabab',
+    name: 'Weekend Special Kabob',
     type:'Advance Order',
     image: ImagePath.f9,
   },

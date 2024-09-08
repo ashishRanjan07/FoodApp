@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   main: {
     borderWidth: 2,
     alignItems: 'center',
-    padding: responsive(15),
+    padding: responsive(10),
     borderRadius: responsive(10),
   },
   text: {

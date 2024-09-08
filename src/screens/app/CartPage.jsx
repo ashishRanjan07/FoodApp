@@ -16,11 +16,13 @@ import {ImagePath} from '../../utils/ImagePath';
 import {responsive} from '../../utils/Responsive';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import CustomButton from '../../components/CustomButton';
+import {useNavigation} from '@react-navigation/native';
 
 const CartPage = ({route}) => {
+  const navigation = useNavigation();
   const staticImageUrl = 'https://picsum.photos/200/300';
   const {cartItems, item, date} = route.params;
-  console.log(cartItems, 'Line 9');
+  // console.log(cartItems, 'Line 9');
   const [notes, setNotes] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -35,8 +37,12 @@ const CartPage = ({route}) => {
     setTotalPrice(total);
   };
 
+  const handleOrderNow = () => {
+    navigation.navigate('Success');
+  };
+
   const renderItem = ({item}) => {
-    console.log(item, 'Line 15');
+    // console.log(item, 'Line 15');
     return (
       <View style={styles.cartItemContainer}>
         <View style={styles.imageContainer}>
@@ -152,7 +158,7 @@ const CartPage = ({route}) => {
               title={`Order Now - Rs.${totalPrice}`}
               color={AppColor.success}
               textColor={AppColor.white}
-              handleAction={() => console.log('Clicked on Order Now')}
+              handleAction={handleOrderNow}
             />
           </View>
         </View>

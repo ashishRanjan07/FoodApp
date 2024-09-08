@@ -86,10 +86,17 @@ const RestaurantFoodList = ({route}) => {
   };
 
   const staticImageUrl = 'https://picsum.photos/200/300';
+
+  const handleFoodDetailsClicked= () => {
+    navigation.navigate('Food Details',{item:item})
+  }
+
   const renderItem = ({item}) => {
     const quantity = itemQuantities[item.Item_ID];
     return (
-      <View style={styles.renderItem}>
+      <TouchableOpacity style={styles.renderItem} 
+      // onPress={handleFoodDetailsClicked} 
+      >
         <View style={{width: '40%', alignItems: 'center'}}>
           <Image
             source={{uri: staticImageUrl}}
@@ -133,7 +140,7 @@ const RestaurantFoodList = ({route}) => {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 

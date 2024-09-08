@@ -9,6 +9,8 @@ import {
   View,
   KeyboardAvoidingView,
   ScrollView,
+  Modal,
+  PermissionsAndroid,
 } from 'react-native';
 import React, {useState, useRef, useEffect} from 'react';
 import {AppColor} from '../../utils/AppColor';
@@ -36,8 +38,13 @@ const Login = () => {
   const [showPasswordError, setShowPasswordError] = useState(null);
   const [loginError, setLoginError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(true);
+  const [isLocationAllowed, setIsLocationAllowed] = useState(false);
 
   useEffect(() => {
+    // const response = storage.getBoolean('isLocationAllowed');
+    // console.log(response,"Line 47");
+    // setIsLocationAllowed()
     if (userId.length > 0) {
       setUserIdError('');
     }
@@ -98,6 +105,38 @@ const Login = () => {
       );
     }
     // navigation.navigate('App Stack');
+  };
+
+  // const fetchLocation = async () => {
+  //   const response = await AsyncStorage.getItem('isLocationAllowed');
+  //   console.log(response, 'Line 46');
+  // };
+
+  const handleTurnOnLocation = async () => {
+    console.log('Clicked on the turn on Location Button');
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: 'Example App',
+          message: 'Example App access to your location ',
+        },
+      );
+      console.log(granted, 'Line 116');
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log('You can use the location');
+        setIsLocationAllowed(true);
+        // storage.set('isLocationAllowed', true)
+        // alert("You can use the location");
+        // AsyncStorage.setItem('isLocationAllowed', isLocationAllowed);
+        setShowModal(!showModal);
+      } else {
+        console.log('location permission denied');
+        // alert("Location permission denied");
+      }
+    } catch (err) {
+      console.warn(err);
+    }
   };
 
   return (
@@ -208,6 +247,39 @@ const Login = () => {
           </View>
         </View>
       )}
+      {isLocationAllowed == false && (
+        <Modal
+          transparent={true}
+          animationType="slide"
+          visible={showModal}
+          onRequestClose={() => setShowModal(!showModal)}>
+          <View style={styles.overlay}>
+            <View style={styles.alertBox}>
+              <Image
+                source={ImagePath.location}
+                resizeMode="contain"
+                style={{width: responsive(150), height: responsive(200)}}
+              />
+              <Text style={styles.title}>
+                To get best offer please turn on location.
+              </Text>
+              <View style={{width: '85%'}}>
+                <CustomButton
+                  title={'Turn On'}
+                  color={AppColor.yellow}
+                  textColor={AppColor.white}
+                  handleAction={handleTurnOnLocation}
+                />
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => setShowModal(!showModal)}>
+                  <Text style={styles.buttonText}>Cancel</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
+      )}
       <Toast />
     </>
   );
@@ -260,7 +332,7 @@ const styles = StyleSheet.create({
   },
   box: {
     borderWidth: 2,
-    padding: responsive(10),
+    padding: responsive(5),
     borderRadius: responsive(5),
     borderColor: '#AFE1AF',
     flexDirection: 'row',
@@ -317,5 +389,43 @@ const styles = StyleSheet.create({
     borderColor: AppColor.blue,
     backgroundColor: AppColor.white,
     paddingTop: responsive(30),
+  },
+  overlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  alertBox: {
+    width: '90%',
+    padding: responsive(20),
+    backgroundColor: 'white',
+    borderRadius: responsive(10),
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: responsive(20),
+    fontFamily: 'NotoSans-Medium',
+    marginBottom: responsive(10),
+    color: AppColor.black,
+    textAlign: 'center',
+  },
+  message: {
+    color: AppColor.success,
+    fontSize: responsive(16),
+    marginBottom: responsive(20),
+  },
+  button: {
+    width: '100%',
+    padding: responsive(10),
+    backgroundColor: AppColor.primary,
+    borderRadius: responsive(5),
+    alignItems: 'center',
+    marginVertical: responsive(5),
+  },
+  buttonText: {
+    color: AppColor.white,
+    fontSize: responsive(18),
+    fontFamily: 'NotoSans-Medium',
   },
 });

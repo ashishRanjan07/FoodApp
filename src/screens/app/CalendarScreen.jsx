@@ -26,10 +26,10 @@ const CalendarScreen = ({route}) => {
     <View style={styles.main}>
       <CustomHeader title={'Select Date'} />
       <UpperHeader />
-      <Text
-        style={
-          styles.text
-        }>{`Your are ordering food for ${item?.name} in ${item?.type}`}</Text>
+      <View style={styles.contentHolder}>
+        <Text style={styles.text}>{` ${item?.name} - ${item?.type}`}</Text>
+      </View>
+
       <CalendarPicker
         minDate={minDate}
         onDateChange={date1 => {
@@ -41,14 +41,14 @@ const CalendarScreen = ({route}) => {
         // showDayStragglers={true}
         previousTitleStyle={styles.dateStyle}
         nextTitleStyle={styles.dateStyle}
-        selectedDayColor={AppColor.blue}
+        selectedDayColor={'transparent'}
         selectedDayStyle={{backgroundColor: 'transparent'}}
         selectedDayTextColor={AppColor.red}
         selectedDayTextStyle={{
           fontFamily: 'NotoSans-Medium',
           fontSize: responsive(20),
         }}
-        // allowRangeSelection={true}
+        allowRangeSelection={true}
         todayBackgroundColor="#f2e6ff"
       />
 
@@ -83,12 +83,20 @@ const styles = StyleSheet.create({
     fontFamily: 'NotoSans-Medium',
   },
   text: {
-    fontFamily: 'NotoSans-Medium',
-    fontSize: responsive(18),
-    color: AppColor.success,
-    width: '80%',
+    fontFamily: 'NotoSans-Bold',
+    fontSize: responsive(16),
+    color: AppColor.white,
     textAlign: 'center',
+    padding: responsive(10),
+  },
+  contentHolder: {
+    borderWidth: 2,
+    backgroundColor: AppColor.red,
+    borderColor: AppColor.red,
+    width: '90%',
+    borderRadius: responsive(20),
     alignSelf: 'center',
     marginVertical: responsive(10),
+    elevation:responsive(10)
   },
 });

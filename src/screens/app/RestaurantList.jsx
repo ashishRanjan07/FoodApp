@@ -18,11 +18,13 @@ import {useNavigation} from '@react-navigation/native';
 const RestaurantList = ({route}) => {
   const navigation = useNavigation();
   const {item, date} = route.params;
+  const type = item?.type;
   const [isLoading, setIsLoading] = useState(true);
 
   const handleRestaurantClicked = item => {
-    console.log(item, 'clicked');
-    navigation.navigate('Restaurant Food List', {item: item, date: date});
+    console.log(type,"Line 25")
+    // navigation.navigate('Restaurant Food List', {item: item, date: date});
+    navigation.navigate('Meal Services', {item: item, date: date,type:type});
   };
 
   const renderItem = ({item}) => {
@@ -57,16 +59,20 @@ const RestaurantList = ({route}) => {
     <View style={styles.main}>
       <CustomHeader title={`${item?.name}`} />
       <UpperHeader />
-      {/* Date for ordering food */}
-      <Text style={styles.text}>
-        You are ordering food for {item?.name} in {item?.type} for Date {date}
-      </Text>
+      <View style={styles.contentHolder}>
+        <Text
+          style={
+            styles.text2
+          }>{` ${item?.name} - ${item?.type} for ${date}`}</Text>
+      </View>
       {/* Recommended and Near & Fast  */}
       <View style={styles.buttonHolder}>
-        <TouchableOpacity style={[styles.button,{backgroundColor:AppColor.success}]}>
+        <TouchableOpacity
+          style={[styles.button, {backgroundColor: AppColor.success}]}>
           <Text style={styles.buttonText}>Recommended</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button,{backgroundColor:AppColor.yellow}]}>
+        <TouchableOpacity
+          style={[styles.button, {backgroundColor: AppColor.yellow}]}>
           <Text style={styles.buttonText}>Near & Fast </Text>
         </TouchableOpacity>
       </View>
@@ -75,7 +81,7 @@ const RestaurantList = ({route}) => {
           data={Data}
           renderItem={renderItem}
           keyExtractor={item => item.Restaurant_ID}
-          numColumns={3}
+          numColumns={2}
         />
       </View>
     </View>
@@ -100,7 +106,7 @@ const styles = StyleSheet.create({
   },
   renderItem: {
     borderWidth: 2,
-    width: responsive(125),
+    width: '48%',
     margin: responsive(5),
     backgroundColor: '#F8F6F4',
     borderRadius: responsive(10),
@@ -160,5 +166,22 @@ const styles = StyleSheet.create({
     padding: responsive(10),
     textAlign: 'center',
     fontSize: responsive(16),
+  },
+  contentHolder: {
+    borderWidth: 2,
+    backgroundColor: AppColor.red,
+    borderColor: AppColor.red,
+    width: '90%',
+    borderRadius: responsive(20),
+    alignSelf: 'center',
+    marginVertical: responsive(10),
+    elevation: responsive(10),
+  },
+  text2: {
+    fontFamily: 'NotoSans-Bold',
+    fontSize: responsive(16),
+    color: AppColor.white,
+    textAlign: 'center',
+    padding: responsive(10),
   },
 });
