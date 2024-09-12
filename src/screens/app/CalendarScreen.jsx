@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {AppColor} from '../../utils/AppColor';
 import CustomHeader from '../../components/CustomHeader';
@@ -11,61 +11,78 @@ import {useNavigation} from '@react-navigation/native';
 
 const CalendarScreen = ({route}) => {
   const navigation = useNavigation();
-  const {item} = route.params;
+  const {item, name} = route.params;
+  // console.log(item, 'Line 15');
+  // console.log(name, 'Line 16');
   const [date, setDate] = useState();
   const minDate = new Date();
 
   const handleSubmit = async () => {
     const formatDate = moment(date).format('DD/MM/YYYY');
     const NewDate = formatDate.split('T')[0];
-    console.log(NewDate, 'Line 21');
+    // console.log(NewDate, 'Line 21');
     setDate(NewDate);
-    navigation.navigate('Restaurant List', {item: item, date: NewDate});
+    if (name) {
+      navigation.navigate('Home Cocked Restaurant Food List',{item:item,name:name,date:NewDate})
+    }
+     else {
+      navigation.navigate('Restaurant List', {item: item, date: NewDate});
+    }
   };
   return (
     <View style={styles.main}>
       <CustomHeader title={'Select Date'} />
-      <UpperHeader />
-      <View style={styles.contentHolder}>
-        <Text style={styles.text}>{` ${item?.name} - ${item?.type}`}</Text>
-      </View>
+      <ScrollView>
+        <UpperHeader />
+        <View style={styles.contentHolder}>
+          {name ? (
+            <Text style={styles.text}>
+              Select the Week to see the menu from {name}{' '}
+            </Text>
+          ) : (
+            <Text style={styles.text}>{` ${item?.name} - ${item?.type}`}</Text>
+          )}
+        </View>
 
-      <CalendarPicker
-        minDate={minDate}
-        onDateChange={date1 => {
-          console.log(date1, 'Line12');
-          setDate(date1);
-        }}
-        firstDay={1}
-        startFromMonday
-        // showDayStragglers={true}
-        previousTitleStyle={styles.dateStyle}
-        nextTitleStyle={styles.dateStyle}
-        selectedDayColor={'transparent'}
-        selectedDayStyle={{backgroundColor: 'transparent'}}
-        selectedDayTextColor={AppColor.red}
-        selectedDayTextStyle={{
-          fontFamily: 'NotoSans-Medium',
-          fontSize: responsive(20),
-        }}
-        allowRangeSelection={true}
-        todayBackgroundColor="#f2e6ff"
-      />
-
-      <View
-        style={{
-          width: '50%',
-          marginVertical: responsive(10),
-          alignSelf: 'flex-end',
-          marginHorizontal: responsive(15),
-        }}>
-        <CustomButton
-          title={'Submit'}
-          color={AppColor.yellow}
-          textColor={AppColor.white}
-          handleAction={handleSubmit}
+        <CalendarPicker
+          minDate={minDate}
+          onDateChange={date1 => {
+            // console.log(date1, 'Line12');
+            setDate(date1);
+          }}
+          firstDay={1}
+          startFromMonday
+          // showDayStragglers={true}
+          previousTitleStyle={styles.dateStyle}
+          nextTitleStyle={styles.dateStyle}
+          selectedDayColor={'transparent'}
+          selectedDayStyle={{backgroundColor: 'transparent'}}
+          selectedDayTextColor={AppColor.red}
+          selectedDayTextStyle={{
+            fontFamily: 'NotoSans-Medium',
+            fontSize: responsive(20),
+          }}
+          allowRangeSelection={
+            item?.name === 'Authentic Specialties' ? false : true
+          }
+          todayBackgroundColor="#f2e6ff"
         />
-      </View>
+
+        <View
+          style={{
+            width: '50%',
+            marginVertical: responsive(10),
+            alignSelf: 'flex-end',
+            marginHorizontal: responsive(15),
+          }}>
+          <CustomButton
+            title={'Submit'}
+            color={AppColor.yellow}
+            textColor={AppColor.white}
+            handleAction={handleSubmit}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -83,20 +100,21 @@ const styles = StyleSheet.create({
     fontFamily: 'NotoSans-Medium',
   },
   text: {
-    fontFamily: 'NotoSans-Bold',
-    fontSize: responsive(16),
+    fontFamily: 'NotoSans-Medium',
+    fontSize: responsive(15),
     color: AppColor.white,
     textAlign: 'center',
-    padding: responsive(10),
+    padding: responsive(5),
+    paddingVertical: responsive(10),
   },
   contentHolder: {
     borderWidth: 2,
     backgroundColor: AppColor.red,
     borderColor: AppColor.red,
-    width: '90%',
+    width: '98%',
     borderRadius: responsive(20),
     alignSelf: 'center',
     marginVertical: responsive(10),
-    elevation:responsive(10)
+    elevation: responsive(10),
   },
 });

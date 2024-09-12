@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   main: {
     borderWidth: 2,
     alignItems: 'center',
-    padding: responsive(10),
+    padding: responsive(5),
     borderRadius: responsive(10),
   },
   text: {
@@ -27,6 +27,6 @@ const styles = StyleSheet.create({
     fontSize: responsive(18),
     fontFamily: 'NotoSans-Medium',
     letterSpacing: responsive(1),
-    textAlign:'center'
+    textAlign: 'center',
   },
 });

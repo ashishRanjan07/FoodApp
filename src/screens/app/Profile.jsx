@@ -36,7 +36,7 @@ const Profile = () => {
   const [showAboutUsModal, setShowAboutUsModal] = useState(false);
 
   const handleHideLogout = async () => {
-    console.log('Clicked on the Logout button');
+    // console.log('Clicked on the Logout button');
     setShowLogoutModal(!showLogoutModal);
   };
   const handleLogout = async () => {

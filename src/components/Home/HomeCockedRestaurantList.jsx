@@ -2,40 +2,35 @@ import {
   ActivityIndicator,
   FlatList,
   Image,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import CustomHeader from '../../components/CustomHeader';
-import UpperHeader from '../../components/Home/UpperHeader';
-import {AppColor} from '../../utils/AppColor';
-import {responsive} from '../../utils/Responsive';
-import Data from '../../assets/json/RestaurantList.json';
 import {useNavigation} from '@react-navigation/native';
+import CustomHeader from '../CustomHeader';
+import UpperHeader from './UpperHeader';
+import {AppColor} from '../../utils/AppColor';
+import HomeSearch from './HomeSearch';
+import {responsive} from '../../utils/Responsive';
 
-const RestaurantList = ({route}) => {
+const HomeCockedRestaurantList = ({route}) => {
   const navigation = useNavigation();
-  const {item, date} = route.params;
-  console.log(date, 'Line 21');
-  const type = item?.type;
-  const typeName = item?.name;
+  const {item, name} = route.params;
+  const [searchText, setSearchText] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   const handleRestaurantClicked = item => {
-    const Address = item?.Address;
-    // navigation.navigate('Restaurant Food List', {item: item, date: date});
-    navigation.navigate('Meal Services', {
+    navigation.navigate('Calendar', {
       item: item,
-      date: date,
-      type: type,
-      address: Address,
-      typeName: typeName,
+      name: name,
     });
   };
 
   const renderItem = ({item}) => {
+    // console.log(item,"Line 28")
     return (
       <TouchableOpacity
         style={[styles.renderItem, {backgroundColor: item?.color}]}
@@ -63,17 +58,21 @@ const RestaurantList = ({route}) => {
       </TouchableOpacity>
     );
   };
+
   return (
     <View style={styles.main}>
-      <CustomHeader title={`${item?.name}`} />
+      <StatusBar barStyle={'dark-content'} backgroundColor={AppColor.yellow} />
+      <CustomHeader title={`${name}`} />
       <UpperHeader />
+      <HomeSearch
+        placeholder={`Search “food from ${name}”`}
+        value={searchText}
+        onchange={text => setSearchText(text)}
+      />
       <View style={styles.contentHolder}>
-        <Text
-          style={
-            styles.text2
-          }>{` ${item?.name} - ${item?.type} for ${date}`}</Text>
+        <Text style={styles.text2}>{` Choose your ${name}`}</Text>
       </View>
-      {/* Recommended and Near & Fast  */}
+
       <View style={styles.buttonHolder}>
         <TouchableOpacity
           style={[styles.button, {backgroundColor: AppColor.success}]}>
@@ -86,7 +85,7 @@ const RestaurantList = ({route}) => {
       </View>
       <View style={{alignItems: 'center', flex: 1}}>
         <FlatList
-          data={Data}
+          data={item?.restaurantList}
           renderItem={renderItem}
           keyExtractor={item => item.Restaurant_ID}
           numColumns={2}
@@ -96,21 +95,49 @@ const RestaurantList = ({route}) => {
   );
 };
 
-export default RestaurantList;
+export default HomeCockedRestaurantList;
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: AppColor.white,
   },
-  text: {
-    fontFamily: 'NotoSana-ExtraBold',
-    fontSize: responsive(20),
-    color: AppColor.yellow,
-    textAlign: 'center',
+  contentHolder: {
+    borderWidth: 2,
+    backgroundColor: AppColor.red,
+    borderColor: AppColor.red,
     width: '95%',
-    padding: responsive(10),
+    borderRadius: responsive(20),
     alignSelf: 'center',
+    marginVertical: responsive(10),
+    elevation: responsive(10),
+  },
+  text2: {
+    fontFamily: 'NotoSans-Medium',
+    fontSize: responsive(16),
+    color: AppColor.white,
+    textAlign: 'center',
+    padding: responsive(5),
+  },
+  buttonHolder: {
+    width: '80%',
+    alignSelf: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    // borderWidth:2,
+    borderRadius: responsive(15),
+    overflow: 'hidden',
+    marginVertical: responsive(10),
+  },
+  button: {
+    width: '50%',
+  },
+  buttonText: {
+    fontFamily: 'NotoSans-Medium',
+    color: AppColor.black,
+    padding: responsive(10),
+    textAlign: 'center',
+    fontSize: responsive(16),
   },
   renderItem: {
     borderWidth: 2,
@@ -154,42 +181,5 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: 'transparent',
     alignItems: 'center',
-  },
-  buttonHolder: {
-    width: '80%',
-    alignSelf: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    // borderWidth:2,
-    borderRadius: responsive(15),
-    overflow: 'hidden',
-    marginVertical: responsive(10),
-  },
-  button: {
-    width: '50%',
-  },
-  buttonText: {
-    fontFamily: 'NotoSans-Medium',
-    color: AppColor.black,
-    padding: responsive(10),
-    textAlign: 'center',
-    fontSize: responsive(16),
-  },
-  contentHolder: {
-    borderWidth: 2,
-    backgroundColor: AppColor.red,
-    borderColor: AppColor.red,
-    width: '95%',
-    borderRadius: responsive(20),
-    alignSelf: 'center',
-    marginVertical: responsive(10),
-    elevation: responsive(10),
-  },
-  text2: {
-    fontFamily: 'NotoSans-Medium',
-    fontSize: responsive(14),
-    color: AppColor.white,
-    textAlign: 'center',
-    padding: responsive(5),
   },
 });

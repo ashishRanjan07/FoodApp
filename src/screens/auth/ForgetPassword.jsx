@@ -120,7 +120,7 @@ const ForgetPassword = () => {
     // if (otp == otpValue) {
     if (otp == '0510') {
       setStep(3);
-      console.log(otp, otpValue, 'Line 109');
+      // console.log(otp, otpValue, 'Line 109');
       setLoading(false);
     } else {
       setOtpError('Please enter valid OTP');

@@ -19,31 +19,33 @@ import HomeSearch from '../../components/Home/HomeSearch';
 import foodCategories from '../../assets/json/Category';
 import TopCategory from '../../assets/json/TopCategory';
 import {useNavigation} from '@react-navigation/native';
+import HomeCard from '../../components/Home/HomeCard';
+import Data from '../../assets/json/HomeCoockedFoodData.json';
 
 const Home = () => {
   const navigation = useNavigation();
   const [searchText, setSearchText] = useState('');
   const [showAll, setShowAll] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(1);
-  const visibleCategories = showAll
-    ? foodCategories
-    : foodCategories.slice(0, 4);
+  // const visibleCategories = showAll
+  //   ? foodCategories
+  //   : foodCategories.slice(0, 4);
 
-  const renderItem = ({item}) => {
-    return (
-      <TouchableOpacity
-        style={styles.renderItem}
-        onPress={() => navigation.navigate('Calendar', {item: item})}>
-        <View>
-          <Image source={item?.image} resizeMode="cover" style={styles.image} />
-        </View>
-        <View style={{paddingHorizontal: responsive(5)}}>
-          <Text style={styles.nameText}>{item?.name}</Text>
-          <Text style={styles.typeText}>{item?.type}</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  };
+  // const renderItem = ({item}) => {
+  //   return (
+  //     <TouchableOpacity
+  //       style={[styles.renderItem,{backgroundColor:item?.color}]}
+  //       onPress={() => navigation.navigate('Calendar', {item: item})}>
+  //       <View>
+  //         <Image source={item?.image} resizeMode="cover" style={styles.image} />
+  //       </View>
+  //       <View style={{paddingHorizontal: responsive(5),padding:responsive(15)}}>
+  //         <Text style={styles.nameText}>{item?.name}</Text>
+  //         <Text style={styles.typeText}>{item?.type}</Text>
+  //       </View>
+  //     </TouchableOpacity>
+  //   );
+  // };
 
   return (
     <View style={styles.main}>
@@ -90,15 +92,51 @@ const Home = () => {
         </View> */}
       <View style={styles.topCategory}>
         <Text style={styles.catText}>Top Category</Text>
-        <View style={{alignItems: 'center', flex: 1}}>
-          <FlatList
+        <ScrollView>
+          <View style={styles.cardHolder}>
+            <HomeCard
+              name={'Home Cooked Food'}
+              type={'Regular Meal Service'}
+              color={AppColor.yellow}
+              image={ImagePath.f1}
+              handleAction={() =>
+                navigation.navigate('Home Cocked Meal Services', {
+                  item: Data,type:TopCategory[0]
+                })
+              }
+            />
+            <HomeCard
+              name={'Authentic Specialties'}
+              type={'Advance Ordering'}
+              color={AppColor.green}
+              image={ImagePath.f2}
+              handleAction={() =>
+                navigation.navigate('Calendar', {item: TopCategory[1]})
+              }
+            />
+            <HomeCard
+              name={'Weekend Party Order'}
+              type={'Pre Order'}
+              color={AppColor.green}
+              image={ImagePath.f3}
+              handleAction={() => console.log('Clicked')}
+            />
+            <HomeCard
+              name={'Authentic from your home Country'}
+              type={'Instant Order'}
+              color={AppColor.yellow}
+              image={ImagePath.f4}
+              handleAction={() => console.log('Clicked')}
+            />
+            {/* <FlatList
             data={TopCategory}
             renderItem={renderItem}
             keyExtractor={item => item.id}
             numColumns={2}
             showsVerticalScrollIndicator={false}
-          />
-        </View>
+          /> */}
+          </View>
+        </ScrollView>
       </View>
     </View>
   );
@@ -188,7 +226,7 @@ const styles = StyleSheet.create({
   },
   nameText: {
     width: '100%',
-    height: responsive(25),
+    // height: responsive(25),
     color: AppColor.black,
     fontSize: responsive(16),
     fontFamily: 'NotoSans-Medium',
@@ -197,5 +235,10 @@ const styles = StyleSheet.create({
     fontFamily: 'NotoSans-Medium',
     color: AppColor.red,
     fontSize: responsive(16),
+  },
+  cardHolder: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
   },
 });

@@ -10,6 +10,9 @@ import CartPage from '../../screens/app/CartPage';
 import FoodDetails from '../../components/search/FoodDetails';
 import RestaurantsMealServices from '../../screens/app/RestaurantsMealServices';
 import Success from '../../screens/app/Success';
+import HomeCoockedMealServices from '../../components/Home/HomeCoockedMealServices';
+import HomeCockedRestaurantList from '../../components/Home/HomeCockedRestaurantList';
+import HomeCockedRestaurantFoodList from '../../components/Home/HomeCockedRestaurantFoodList';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,7 +44,7 @@ const AppStack = () => {
         component={RestaurantFoodList}
         options={{headerShown: false}}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="Cart"
         component={CartPage}
         options={{headerShown: false}}
@@ -56,7 +59,23 @@ const AppStack = () => {
         component={RestaurantsMealServices}
         options={{headerShown: false}}
       />
-        <Stack.Screen
+
+      <Stack.Screen
+        name="Home Cocked Meal Services"
+        component={HomeCoockedMealServices}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Home Cocked RestaurantList"
+        component={HomeCockedRestaurantList}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Home Cocked Restaurant Food List"
+        component={HomeCockedRestaurantFoodList}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
         name="Success"
         component={Success}
         options={{headerShown: false}}
