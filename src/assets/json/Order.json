@@ -1,0 +1,58 @@
+{
+  "orderHistory": [
+    {
+      "restaurantName": "Tasty Bites",
+      "restaurantAddress": "123 Main St, Anytown USA",
+      "orderDate": "2024-09-12T18:30:00Z",
+      "rating": "4.5",
+      "id":1,
+      "items": [
+        {
+          "dishName": "Chicken Tikka Masala",
+          "type": "non-veg",
+          "quantity": 1,
+          "orderDate": "2024-09-12T18:30:00Z",
+          "price": 15.99,
+          "imageURL": "https://example.com/chicken-tikka-masala.jpg"
+        },
+        {
+          "dishName": "Vegetable Korma",
+          "type": "veg",
+          "quantity": 2,
+          "orderDate": "2024-09-12T18:30:00Z",
+          "price": 10.99,
+          "imageURL": "https://example.com/vegetable-korma.jpg"
+        }
+      ],
+      "totalCost": 26.98,
+      "status": "Delivered"
+    },
+    {
+      "restaurantName": "Sushi Palace",
+      "restaurantAddress": "456 Ocean Ave, Beachside USA",
+      "orderDate": "2024-09-11T20:45:00Z",
+      "rating": "4.0",
+      "id":2,
+      "items": [
+        {
+          "dishName": "Salmon Sashimi",
+          "type": "veg",
+          "quantity": 3,
+          "orderDate": "2024-09-11T20:45:00Z",
+          "price": 8.5,
+          "imageURL": "https://example.com/salmon-sashimi.jpg"
+        },
+        {
+          "dishName": "California Roll",
+          "type": "non-veg",
+          "quantity": 2,
+          "orderDate": "2024-09-11T20:45:00Z",
+          "price": 7.25,
+          "imageURL": "https://example.com/california-roll.jpg"
+        }
+      ],
+      "totalCost": 32.75,
+      "status": "Pending"
+    }
+  ]
+}
