@@ -13,6 +13,7 @@ import Success from '../../screens/app/Success';
 import HomeCoockedMealServices from '../../components/Home/HomeCoockedMealServices';
 import HomeCockedRestaurantList from '../../components/Home/HomeCockedRestaurantList';
 import HomeCockedRestaurantFoodList from '../../components/Home/HomeCockedRestaurantFoodList';
+import EditProfile from '../../screens/app/profile/EditProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -78,6 +79,11 @@ const AppStack = () => {
       <Stack.Screen
         name="Success"
         component={Success}
+        options={{headerShown: false}}
+      />
+       <Stack.Screen
+        name="Edit Profile"
+        component={EditProfile}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
