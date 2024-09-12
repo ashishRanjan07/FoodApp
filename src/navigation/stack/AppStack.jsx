@@ -14,6 +14,7 @@ import HomeCoockedMealServices from '../../components/Home/HomeCoockedMealServic
 import HomeCockedRestaurantList from '../../components/Home/HomeCockedRestaurantList';
 import HomeCockedRestaurantFoodList from '../../components/Home/HomeCockedRestaurantFoodList';
 import EditProfile from '../../screens/app/profile/EditProfile';
+import Order from '../../screens/app/profile/Order';
 
 const Stack = createNativeStackNavigator();
 
@@ -81,9 +82,14 @@ const AppStack = () => {
         component={Success}
         options={{headerShown: false}}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="Edit Profile"
         component={EditProfile}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="My Order"
+        component={Order}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

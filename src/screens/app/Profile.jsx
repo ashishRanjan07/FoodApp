@@ -88,10 +88,10 @@ const Profile = () => {
             handleAction={() => navigation.navigate('Edit Profile')}
           />
           <CustomListHolder
-            Icon={MaterialIcons}
-            IconName={'history'}
+            Icon={Feather}
+            IconName={'shopping-bag'}
             title={'My Order'}
-            handleAction={() => console.log('Clicked on the My Order Options')}
+            handleAction={() => navigation.navigate('My Order')}
           />
           <CustomListHolder
             Icon={MaterialIcons}
