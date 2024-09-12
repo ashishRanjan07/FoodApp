@@ -85,9 +85,7 @@ const Profile = () => {
             Icon={MaterialCommunityIcons}
             IconName={'account-edit'}
             title={'Edit Account'}
-            handleAction={() =>
-              console.log('Clicked on the Edit Profile Options')
-            }
+            handleAction={() => navigation.navigate('Edit Profile')}
           />
           <CustomListHolder
             Icon={MaterialIcons}
