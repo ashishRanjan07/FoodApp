@@ -21,7 +21,7 @@ const Notification = () => {
   const [data, setData] = useState();
 
   const handleClicked = item => {
-    console.log(item, 'Line 21');
+    // console.log(item, 'Line 21');
     setShowModal(!showModal);
     setData(item);
   };

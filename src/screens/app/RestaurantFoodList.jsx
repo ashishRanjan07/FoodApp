@@ -17,8 +17,8 @@ import HomeSearch from '../../components/Home/HomeSearch';
 
 const RestaurantFoodList = ({route}) => {
   const navigation = useNavigation();
-  const {item, date} = route.params;
-  // console.log(item?.Menu, date, 'Line 10');
+  const {item, date, restaurantName, address} = route.params;
+  // console.log(address, 'Line 10');
   const [searchText, setSearchText] = useState('');
   const [itemQuantities, setItemQuantities] = useState({});
   const [cartCount, setCartCount] = useState(0);
@@ -64,7 +64,9 @@ const RestaurantFoodList = ({route}) => {
   };
 
   const updateCartItems = itemId => {
+    console.log(item.Menu,"Line 67")
     const menuItem = item.Menu.find(menuItem => menuItem.Item_ID === itemId);
+    console.log(menuItem,"Line 69")
     if (!menuItem) return;
 
     setCartItems(prevState => {
@@ -82,30 +84,34 @@ const RestaurantFoodList = ({route}) => {
   };
 
   const handleCartClicked = () => {
-    navigation.navigate('Cart', {cartItems, item, date});
+    console.log(cartItems, item, date, restaurantName, 'Line 85');
+    navigation.navigate('Cart', {
+      cartItems,
+      item,
+      date,
+      restaurantName,
+      address,
+    });
   };
 
   const staticImageUrl = 'https://picsum.photos/200/300';
 
-  const handleFoodDetailsClicked= () => {
-    navigation.navigate('Food Details',{item:item})
-  }
+  const handleFoodDetailsClicked = () => {
+    navigation.navigate('Food Details', {item: item});
+  };
 
   const renderItem = ({item}) => {
     const quantity = itemQuantities[item.Item_ID];
     return (
-      <TouchableOpacity style={styles.renderItem} 
-      // onPress={handleFoodDetailsClicked} 
-      >
-        <View style={{width: '40%', alignItems: 'center'}}>
+      <TouchableOpacity style={styles.renderItem}>
+        <View style={styles.imageHolder}>
           <Image
             source={{uri: staticImageUrl}}
             resizeMode="cover"
             style={styles.imageStyle}
           />
         </View>
-
-        <View style={{width: '60%', gap: responsive(5)}}>
+        <View style={styles.detailedHolder}>
           <Text style={styles.name}>{item?.Name}</Text>
           <Text style={styles.priceText}>Rs.{item?.Price}</Text>
           <Text
@@ -120,7 +126,6 @@ const RestaurantFoodList = ({route}) => {
                 onPress={() => handlePlusClick(item.Item_ID)}>
                 <Text style={styles.plus}>+</Text>
               </TouchableOpacity>
-
               <Text style={styles.countText}>{quantity}</Text>
               <TouchableOpacity
                 style={styles.plusHolder}
@@ -129,6 +134,7 @@ const RestaurantFoodList = ({route}) => {
               </TouchableOpacity>
             </View>
             <TouchableOpacity
+              onPress={() => handlePlusClick(item.Item_ID)}
               style={[
                 styles.selectQty,
                 {
@@ -146,16 +152,16 @@ const RestaurantFoodList = ({route}) => {
 
   return (
     <View style={styles.main}>
-      <CustomHeader title={item?.Restaurant_Name} />
+      <CustomHeader title={restaurantName} />
       <UpperHeader />
       <HomeSearch
-        placeholder={`Search “food from ${item?.Restaurant_Name}”`}
+        placeholder={`Search “food from ${restaurantName}”`}
         value={searchText}
         onchange={text => setSearchText(text)}
       />
       <View style={styles.catHolder}>
         <View style={{width: '50%'}}>
-          <Text style={styles.text}>{item?.Restaurant_Name}</Text>
+          <Text style={styles.text}>{restaurantName}</Text>
           <Text style={[styles.text, {color: AppColor.red}]}>{date}</Text>
         </View>
         <TouchableOpacity style={{width: '50%', alignItems: 'flex-end'}}>
@@ -238,6 +244,7 @@ const styles = StyleSheet.create({
     fontFamily: 'NotoSans-Medium',
     color: AppColor.black,
     fontSize: responsive(20),
+    width: '95%',
   },
   priceText: {
     fontSize: responsive(17),
@@ -256,9 +263,7 @@ const styles = StyleSheet.create({
     paddingEnd: responsive(20),
   },
   lowerButtonHolder: {
-    position: 'absolute',
     width: '95%',
-    bottom: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-evenly',
@@ -275,9 +280,9 @@ const styles = StyleSheet.create({
     borderColor: AppColor.borderColor,
   },
   buttonText: {
-    fontFamily: 'NotoSans-Medium',
+    fontFamily: 'NotoSans-Regular',
     color: AppColor.white,
-    fontSize: responsive(14),
+    fontSize: responsive(12),
     textAlign: 'center',
   },
   plus: {
@@ -311,8 +316,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   addToCardButtonText: {
-    fontSize: responsive(18),
+    fontSize: responsive(16),
     color: AppColor.white,
     fontFamily: 'NotoSans-Medium',
+  },
+  imageHolder: {
+    width: '40%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  detailedHolder: {
+    width: '60%',
+    gap: responsive(5),
   },
 });

@@ -4,10 +4,12 @@ import {AppColor} from '../../utils/AppColor';
 import CustomHeader from '../CustomHeader';
 import {responsive} from '../../utils/Responsive';
 import CustomButton from '../CustomButton';
+import { useNavigation } from '@react-navigation/native';
 
 const FoodDetails = ({route}) => {
+  const navigation = useNavigation();
   const {item} = route.params;
-  console.log(item, 'line 8');
+  // console.log(item, 'line 8');
   return (
     <View style={styles.main}>
       <CustomHeader title={`${item?.name}`} />
@@ -45,6 +47,7 @@ const FoodDetails = ({route}) => {
           title={'Place Order'}
           color={AppColor.yellow}
           textColor={AppColor.white}
+          handleAction={()=>navigation.navigate('Success') }
         />
       </View>
     </View>

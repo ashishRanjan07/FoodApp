@@ -11,18 +11,19 @@ import {
 } from 'react-native';
 import {AppColor} from '../../utils/AppColor';
 import CustomHeader from '../../components/CustomHeader';
-import UpperHeader from '../../components/Home/UpperHeader';
 import {ImagePath} from '../../utils/ImagePath';
 import {responsive} from '../../utils/Responsive';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
+import UpperHeader from '../../components/Home/UpperHeader';
 
 const CartPage = ({route}) => {
   const navigation = useNavigation();
   const staticImageUrl = 'https://picsum.photos/200/300';
-  const {cartItems, item, date} = route.params;
-  // console.log(cartItems, 'Line 9');
+  const {cartItems, item, date, restaurantName, address} = route.params;
+
+  
   const [notes, setNotes] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -59,15 +60,7 @@ const CartPage = ({route}) => {
           </Text>
         </View>
         <View style={styles.priceHolder}>
-          <View
-            style={{
-              flexDirection: 'row',
-              width: '100%',
-              alignItems: 'center',
-              alignSelf: 'center',
-              justifyContent: 'center',
-              gap: responsive(10),
-            }}>
+          <View style={styles.deHolder}>
             <TouchableOpacity style={styles.plusHolder}>
               <Text style={styles.plus}>+</Text>
             </TouchableOpacity>
@@ -87,28 +80,22 @@ const CartPage = ({route}) => {
   return (
     <View style={styles.main}>
       <CustomHeader title={'Cart'} />
+      <UpperHeader />
       {/* Delivery Related Info */}
       <ScrollView>
         <View style={styles.upperHeaderHolder}>
-          <View style={styles.textHolder}>
-            <Text style={styles.nameText1}>
-              Delivery from {item?.Restaurant_Name}{' '}
-            </Text>
-            <Text style={styles.nameText} numberOfLines={2}>
-              Address:{item?.Address}
-            </Text>
-          </View>
-          <View style={styles.imageHolder}>
-            <Image
-              source={ImagePath.user}
-              resizeMode="contain"
-              style={styles.imageStyle}
-            />
-          </View>
+          <Text style={styles.nameText1}>Delivery from {restaurantName}</Text>
+          <Text style={styles.nameText} numberOfLines={2}>
+            Address:{address}
+          </Text>
         </View>
         <View style={styles.detailsHolder}>
-          <Text style={[styles.nameText, {color: AppColor.white}]}>
-            Ordering for - {date} {'\n'} Pickup start {item?.time}
+          <Text
+            style={[
+              styles.nameText,
+              {color: AppColor.white, textAlign: 'center'},
+            ]}>
+            Ordering for - {date} {'\n'} Pickup start {item?.pickup}
           </Text>
         </View>
         {/* Show list of item that have been selected in previous section */}
@@ -116,7 +103,7 @@ const CartPage = ({route}) => {
           <FlatList
             data={Object.values(cartItems)}
             renderItem={renderItem}
-            keyExtractor={item => item.Item_ID.toString()}
+            keyExtractor={(item,index) => index}
           />
         </View>
         {/* Give the note to kitchen */}
@@ -175,11 +162,9 @@ const styles = StyleSheet.create({
     backgroundColor: AppColor.white,
   },
   upperHeaderHolder: {
-    backgroundColor: AppColor.white,
-    padding: responsive(10),
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    marginVertical: responsive(5),
+    width: '95%',
+    alignSelf: 'center',
   },
   textHolder: {
     padding: responsive(10),
@@ -189,14 +174,14 @@ const styles = StyleSheet.create({
   nameText1: {
     fontFamily: 'NotoSans-Medium',
     color: AppColor.black,
-    fontSize: responsive(18),
+    fontSize: responsive(16),
     width: '100%',
   },
   nameText: {
-    fontFamily: 'NotoSans-Medium',
-    color: AppColor.black,
-    fontSize: responsive(16),
-    textAlign: 'center',
+    fontFamily: 'NotoSans-Regular',
+    color: AppColor.borderColor,
+    fontSize: responsive(15),
+    // textAlign: 'center',
     width: '100%',
   },
   imageStyle: {
@@ -209,10 +194,12 @@ const styles = StyleSheet.create({
   },
   detailsHolder: {
     borderWidth: 2,
-    width: '90%',
+    width: '95%',
     alignSelf: 'center',
-    borderRadius: responsive(5),
-    padding: responsive(5),
+    alignItems: 'center',
+    borderRadius: responsive(15),
+    paddingHorizontal: responsive(10),
+    paddingVertical: responsive(5),
     backgroundColor: AppColor.success,
     borderColor: AppColor.success,
   },
@@ -229,10 +216,6 @@ const styles = StyleSheet.create({
     paddingVertical: responsive(10),
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
-  },
-  cartItemInfo: {
-    // flex: 1,
-    // paddingRight: responsive(10),
   },
   itemName: {
     fontFamily: 'NotoSans-Medium',
@@ -252,12 +235,12 @@ const styles = StyleSheet.create({
   quantity: {
     fontFamily: 'NotoSans-Medium',
     fontSize: responsive(14),
-    color: AppColor.black,
+    color: AppColor.white,
   },
   price: {
     fontFamily: 'NotoSans-Medium',
     fontSize: responsive(14),
-    color: AppColor.success,
+    color: AppColor.black,
   },
   cartItemImage: {
     height: responsive(80),
@@ -279,16 +262,14 @@ const styles = StyleSheet.create({
     gap: responsive(10),
   },
   plusHolder: {
-    borderWidth: 2,
     paddingHorizontal: responsive(10),
-    backgroundColor: AppColor.light,
+    backgroundColor: AppColor.red,
     borderRadius: responsive(5),
-    borderColor: AppColor.light,
   },
   plus: {
-    color: AppColor.red,
+    color: AppColor.white,
     fontFamily: 'NotoSans-Medium',
-    fontSize: responsive(14),
+    fontSize: responsive(20),
   },
   kitchenNotes: {
     borderWidth: 2,
@@ -308,5 +289,16 @@ const styles = StyleSheet.create({
     color: AppColor.black,
     fontFamily: 'NotoSans-Medium',
     fontSize: responsive(18),
+  },
+  deHolder: {
+    flexDirection: 'row',
+    width: '100%',
+    alignItems: 'center',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    gap: responsive(10),
+    backgroundColor: AppColor.red,
+    overflow: 'hidden',
+    borderRadius: responsive(5),
   },
 });

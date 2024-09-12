@@ -89,12 +89,13 @@ const Search = () => {
             <Text style={styles.buttonText2}>Near & Fast </Text>
           </TouchableOpacity>
         </View>
-        <View style={{alignItems: 'center',flex:1}}>
+        <View style={{alignItems: 'center',alignSelf:'center', flex:1,width:'100%'}}>
           <FlatList
             data={Data?.foodItems}
             renderItem={renderItem}
             keyExtractor={item => item?.id}
             numColumns={3}
+            showsVerticalScrollIndicator={false}
           />
         </View>
       </View>
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
   },
   renderItem: {
     borderWidth: 2,
-    width: responsive(125),
+    width: '31%',
     margin: responsive(5),
     backgroundColor: '#F8F6F4',
     borderRadius: responsive(10),

@@ -1,43 +1,35 @@
 import {
-  StyleSheet,
-  Text,
-  View,
   FlatList,
-  TouchableOpacity,
   Image,
   StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import CustomHeader from '../../components/CustomHeader';
-import UpperHeader from '../../components/Home/UpperHeader';
+import CustomHeader from '../CustomHeader';
 import {AppColor} from '../../utils/AppColor';
-import HomeSearch from '../../components/Home/HomeSearch';
+import UpperHeader from './UpperHeader';
+import HomeSearch from './HomeSearch';
 import {responsive} from '../../utils/Responsive';
 
-const RestaurantsMealServices = ({route}) => {
+const HomeCoockedMealServices = ({route}) => {
   const navigation = useNavigation();
-  const {item, date, type, address, typeName} = route.params;
-  const restaurantName = item?.Restaurant_Name;
+  const {item, type} = route.params;
   const [searchText, setSearchText] = useState('');
-  const handleMealTypeClicked = item => {
-    // console.log(item,"Line 24")
-    navigation.navigate('Restaurant Food List', {
-      item: item,
-      date: date,
-      restaurantName: restaurantName,
-      address,
-    });
-  };
+
   const renderItem = ({item}) => {
-    // console.log(item,"Line 28")
     return (
-      <TouchableOpacity
-        onPress={() => handleMealTypeClicked(item)}
+      <TouchableOpacity key={item?.id}
         style={[
           styles.renderItem,
           {backgroundColor: item?.color, borderColor: item?.color},
-        ]}>
+        ]}
+        onPress={() =>
+          navigation.navigate('Home Cocked RestaurantList', {item: item,name:type?.name})
+        }>
         <Image
           source={{uri: item?.image}}
           resizeMode="cover"
@@ -53,23 +45,26 @@ const RestaurantsMealServices = ({route}) => {
   return (
     <View style={styles.main}>
       <StatusBar barStyle={'dark-content'} backgroundColor={AppColor.yellow} />
-      <CustomHeader title={item?.Restaurant_Name} />
+      <CustomHeader title={type?.name} />
       <UpperHeader />
       <HomeSearch
-        placeholder={`Search “food from ${item?.Restaurant_Name}”`}
+        placeholder={`Search “food from ${type?.name}”`}
         value={searchText}
         onchange={text => setSearchText(text)}
       />
-      <View style={styles.restaurantName}>
-        <Text style={styles.headerText}>{item?.Restaurant_Name}</Text>
+      <View>
+        <Text style={styles.headerText}>
+          {type?.name} - {type?.type}
+        </Text>
       </View>
+
       <View style={styles.contentHolder}>
-        <Text style={styles.text2}>{` ${typeName} - ${type} for ${date}`}</Text>
+        <Text style={styles.text2}>Choose your preferred meal</Text>
       </View>
       <View style={{flex: 1, alignSelf: 'center', width: '100%'}}>
         <FlatList
           showsVerticalScrollIndicator={false}
-          data={item?.mealServiceType}
+          data={item}
           renderItem={renderItem}
           keyExtractor={item => item.id}
         />
@@ -78,17 +73,24 @@ const RestaurantsMealServices = ({route}) => {
   );
 };
 
-export default RestaurantsMealServices;
+export default HomeCoockedMealServices;
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: AppColor.white,
   },
+  headerText: {
+    fontSize: responsive(18),
+    color: AppColor.black,
+    textAlign: 'center',
+    fontFamily: 'NotoSans-Medium',
+    marginVertical: responsive(10),
+  },
   contentHolder: {
     borderWidth: 2,
-    backgroundColor: AppColor.red,
-    borderColor: AppColor.red,
+    backgroundColor: AppColor.green,
+    borderColor: AppColor.green,
     width: '98%',
     borderRadius: responsive(20),
     alignSelf: 'center',
@@ -97,19 +99,10 @@ const styles = StyleSheet.create({
     paddingVertical: responsive(10),
   },
   text2: {
-    fontFamily: 'NotoSans-Bold',
-    fontSize: responsive(14),
+    fontFamily: 'NotoSans-Medium',
+    fontSize: responsive(17),
     color: AppColor.white,
     textAlign: 'center',
-  },
-  imageStyle: {
-    width: '45%',
-    height: responsive(150),
-  },
-  text: {
-    fontSize: responsive(20),
-    color: AppColor.black,
-    fontFamily: 'NotoSans-Medium',
   },
   renderItem: {
     borderWidth: 2,
@@ -125,26 +118,23 @@ const styles = StyleSheet.create({
     gap: responsive(10),
     alignItems: 'center',
   },
+  imageStyle: {
+    width: '45%',
+    height: responsive(150),
+  },
   detailsContainer: {
     width: '55%',
     padding: responsive(10),
     gap: responsive(10),
   },
+  text: {
+    fontSize: responsive(20),
+    color: AppColor.black,
+    fontFamily: 'NotoSans-Medium',
+  },
   pickupTimeText: {
     fontFamily: 'NotoSans-Medium',
     color: AppColor.white,
     fontSize: responsive(18),
-  },
-  restaurantName: {
-    width: '90%',
-    alignSelf: 'center',
-    marginTop: responsive(10),
-    alignItems: 'center',
-  },
-  headerText: {
-    fontFamily: 'NotoSans-Medium',
-    color: AppColor.black,
-    fontSize: responsive(20),
-    textAlign: 'center',
   },
 });

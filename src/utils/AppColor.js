@@ -9,5 +9,8 @@ export const AppColor ={
     red:'#FF474D',
     blue:'#0080FF',
     light:'#F8F6F4',
+    green:'#028940',
+    secondYellow:'#F4BB29'
+
     
 }

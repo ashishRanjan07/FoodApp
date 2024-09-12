@@ -10,7 +10,7 @@ const Category = ({
   showAll,
   handleShowAll,
 }) => {
-    console.log(visibleCategories,selectedCategory,handleCategory,showAll,handleShowAll,"Line 13")
+    // console.log(visibleCategories,selectedCategory,handleCategory,showAll,handleShowAll,"Line 13")
   const visibleItems = showAll
     ? visibleCategories
     : visibleCategories.slice(0, 4);
