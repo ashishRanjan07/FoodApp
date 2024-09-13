@@ -97,9 +97,7 @@ const Profile = () => {
             Icon={MaterialIcons}
             IconName={'payments'}
             title={'Payment Information'}
-            handleAction={() =>
-              console.log('Clicked on the Payment Information Options')
-            }
+            handleAction={() => navigation.navigate('Payment Information')}
           />
           <CustomListHolder
             Icon={MaterialIcons}

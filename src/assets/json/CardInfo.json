@@ -1,0 +1,40 @@
+
+[
+    {
+      "cardType": "VISA",
+      "isCreditCard": true,
+      "cardNumber": "4111111111111111",
+      "expirationMonth": "12",
+      "expirationYear": "2025",
+      "securityCode": "123",
+      "cardLastFourDigits": "1111"
+    },
+    {
+      "cardType": "MASTERCARD",
+      "isCreditCard": false,
+      "cardNumber": "5555555555554444",
+      "expirationMonth": "05",
+      "expirationYear": "2026",
+      "securityCode": "456",
+      "cardLastFourDigits": "4444"
+    },
+    {
+      "cardType": "AMEX",
+      "isCreditCard": true,
+      "cardNumber": "378282246310005",
+      "expirationMonth": "07",
+      "expirationYear": "2027",
+      "securityCode": "7890",
+      "cardLastFourDigits": "0005"
+    },
+    {
+      "cardType": "DISCOVER",
+      "isCreditCard": false,
+      "cardNumber": "6011111111111117",
+      "expirationMonth": "01",
+      "expirationYear": "2028",
+      "securityCode": "321",
+      "cardLastFourDigits": "1117"
+    }
+  ]
+  
