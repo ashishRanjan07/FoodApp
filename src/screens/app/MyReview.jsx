@@ -1,5 +1,5 @@
 import {StatusBar, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Pending from './Pending';
 import Published from './Published';
@@ -8,8 +8,32 @@ import {AppColor} from '../../utils/AppColor';
 import {responsive} from '../../utils/Responsive';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 const Tab = createMaterialTopTabNavigator();
+import Data from '../../assets/json/Review.json';
 
 const MyReview = () => {
+  const [data, setData] = useState(Data);
+  const [loading, setLoading] = useState(false);
+  const [pendingData, setPendingData] = useState([]);
+  const [publishedData, setPublishedData] = useState();
+
+  useEffect(() => {
+    separateReview();
+  }, []);
+
+  const separateReview = async () => {
+    try {
+      const filteredData = data.filter(item => item.status === 'Pending');
+      setPendingData(filteredData);
+      console.log(filteredData, 'line 27');
+      const publishedFilteredData = data.filter(
+        item => item.status === 'Published',
+      );
+      setPublishedData(publishedFilteredData);
+    } catch (error) {
+      console.log('Error separating review data:', error);
+    }
+  };
+
   const CustomTabBarItem = ({iconName, label}) => (
     <View style={{flexDirection: 'row', alignItems: 'center'}}>
       <MaterialIcons
@@ -33,34 +57,38 @@ const MyReview = () => {
     <>
       <StatusBar backgroundColor={AppColor.yellow} barStyle={'dark-content'} />
       <CustomHeader title={'My Review'} />
-      <Tab.Navigator
-        screenOptions={{
-          tabBarLabelStyle: styles.tabBarLabel,
-          tabBarIndicatorStyle: {
-            borderBottomWidth: 2,
-            borderColor: AppColor.success,
-          },
-          tabBarIconStyle: styles.tabBarIcon,
-        }}>
-        <Tab.Screen
-          name="Pending"
-          component={Pending}
-          options={{
-            tabBarLabel: () => (
-              <CustomTabBarItem iconName="pending-actions" label="Pending" />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Published"
-          component={Published}
-          options={{
-            tabBarLabel: () => (
-              <CustomTabBarItem iconName="publish" label="Published" />
-            ),
-          }}
-        />
-      </Tab.Navigator>
+      {pendingData && publishedData ? (
+        <Tab.Navigator
+          screenOptions={{
+            tabBarLabelStyle: styles.tabBarLabel,
+            tabBarIndicatorStyle: {
+              borderBottomWidth: 2,
+              borderColor: AppColor.success,
+            },
+            tabBarIconStyle: styles.tabBarIcon,
+          }}>
+          <Tab.Screen
+            name="Pending"
+            component={Pending}
+            initialParams={{reviewData: pendingData}}
+            options={{
+              tabBarLabel: () => (
+                <CustomTabBarItem iconName="pending-actions" label="Pending" />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Published"
+            component={Published}
+            initialParams={{reviewData:publishedData}}
+            options={{
+              tabBarLabel: () => (
+                <CustomTabBarItem iconName="publish" label="Published" />
+              ),
+            }}
+          />
+        </Tab.Navigator>
+      ) : null}
     </>
   );
 };

@@ -19,6 +19,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import CustomButton from '../../../components/CustomButton';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
+import {Rating} from 'react-native-ratings';
 
 const Order = () => {
   const [searchText, setSearchText] = useState('');
@@ -105,13 +106,18 @@ const Order = () => {
           <View style={styles.dotHolder} />
           <View style={styles.view2}>
             <View style={styles.view3}>
-              <Text style={styles.rateText}>Rate {}</Text>
+              <Text style={styles.rateText}>Rate</Text>
               <View
                 style={{
                   width: '78%',
                   overflow: 'hidden',
                 }}>
-                <Text style={styles.name}>{item?.rating}</Text>
+               <Rating
+          readonly={true}
+          imageSize={30}
+          startingValue={item?.rating}
+          style={{paddingVertical: 10, backgroundColor: AppColor.white}}
+        />
               </View>
             </View>
             <View style={{width: '30%'}}>
@@ -310,7 +316,6 @@ const styles = StyleSheet.create({
   view3: {
     width: '70%',
     flexDirection: 'row',
-    gap: 5,
     alignItems: 'center',
   },
   optionHolder: {
