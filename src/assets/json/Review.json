@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "status": "Pending",
+    "name": "Panner",
+    "description": "Extra Butter with Mutter Panner.",
+    "rating": 0,
+    "image": "https://static.toiimg.com/photo/53251884.cms"
+  },
+  {
+    "id": 2,
+    "status": "Published",
+    "name": "Mix Vegetable",
+    "description": "Carrot green peas, beans chapped and cooked in rich tomato gravy.",
+    "rating": 4,
+    "image": "https://shwetainthekitchen.com/wp-content/uploads/2023/03/mixed-vegetable-curry.jpg"
+  },
+  {
+    "id": 3,
+    "status": "Pending",
+    "name": "Veg Spring Roll",
+    "description": "Crispy corn flour rolls filled with vegetable deep fried.",
+    "rating": 0,
+    "image": "https://www.kitchensanctuary.com/wp-content/uploads/2023/10/Vegetable-Spring-Rolls-square-FS.jpg"
+  },
+  {
+    "id": 4,
+    "status": "Published",
+    "name": "Steamed Rice",
+    "description": "Steamed riced cooked to perfection.",
+    "rating": 3,
+    "image": "https://res.cloudinary.com/anova-applied-electronics/image/upload/w_567,h_567,c_fill,f_auto,q_auto,dpr_auto,/v1594684608/mobileProduction/o7jayxyiqee6j6l7otfl.jpg"
+  },
+  {
+    "id": 5,
+    "status": "Pending",
+    "name": "Mushroom Tikka",
+    "description": "",
+    "rating": 0,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvpJAabIe1ZjjaUOpDUHqn5wqQYsystEnZDw&s"
+  },
+  {
+    "id": 6,
+    "status": "Published",
+    "name": "Panner Tikka Roll",
+    "description": "Soft cottage cheese marinated and skewered in tandoori mixed with lots of vegetable and sauces served on a crispy tawa paratha..",
+    "rating": 5,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfyb9ttIsLtxaFmkLzGvkWII6merRb9jXsdw&s"
+  },
+  {
+    "id": 7,
+    "status": "Pending",
+    "name": "Chilly Panner",
+    "description": "",
+    "rating": 0,
+    "image": "https://www.yummytummyaarthi.com/wp-content/uploads/2023/06/chilli-paneer-1.jpeg"
+  },
+  {
+    "id": 8,
+    "status": "Published",
+    "name": "Kadhai Paneer",
+    "description": "Spicy curry made with chopped onion, tomato,capsicum and cooked with cottage cheese.",
+    "rating": 3.5,
+    "image": "https://www.funfoodfrolic.com/wp-content/uploads/2020/12/Kadhai-Paneer-Thumbnail.jpg"
+  },
+  {
+    "id": 9,
+    "status": "Pending",
+    "name": "Dal Tadka Yellow",
+    "description": "Arhar dal in desi ghee Tadka.",
+    "rating": 0,
+    "image": "https://i0.wp.com/www.sinamontales.com/dotcord/uploads/2016/10/restaurant-style-dal-tadka-how-to-make-best-dal-tadka.1024x1024-7.jpg?resize=500%2C375&ssl=1"
+  }
+]
