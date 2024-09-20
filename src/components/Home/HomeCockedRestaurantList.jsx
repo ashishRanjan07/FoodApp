@@ -53,7 +53,18 @@ const HomeCockedRestaurantList = ({route}) => {
           />
         </View>
         <View style={{padding: responsive(5)}}>
-          <Text style={styles.nameText}>{item?.Restaurant_Name}</Text>
+          <Text
+            style={[
+              styles.nameText,
+              {
+                color:
+                  item?.Restaurant_Name === 'Mita’s Kitchen'
+                    ? AppColor.white
+                    : AppColor.black,
+              },
+            ]}>
+            {item?.Restaurant_Name}
+          </Text>
         </View>
       </TouchableOpacity>
     );

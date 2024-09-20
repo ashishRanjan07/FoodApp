@@ -18,7 +18,7 @@ const Published = ({route}) => {
   const [initialValue, setInitialValue] = useState(0);
   const [selectedId, setSelectedId] = useState('');
   const renderItem = ({item}) => {
-    console.log(item);
+    // console.log(item);
     return (
       <View style={styles.renderItem}>
         <View style={styles.detailsHolder}>
@@ -115,10 +115,12 @@ const styles = StyleSheet.create({
   imageHolder: {
     backgroundColor: AppColor.white,
     width: '25%',
+    alignItems:'center'
   },
   imageStyle: {
     height: responsive(100),
     width: responsive(100),
+    borderRadius:responsive(25)
   },
   loaderText: {
     fontSize: responsive(18),

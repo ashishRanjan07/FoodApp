@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "name": "Spaghetti Carbonara",
+    "imageLink": "https://cristinadovan.com/wp-content/uploads/2023/02/cropped-cook_logo.jpg",
+    "nameOfRestaurant": "The Italian Corner",
+    "description": "A classic Italian pasta dish with creamy sauce, pancetta, and Parmesan cheese.",
+    "contactDetails": {
+      "phone": "123-456-7890",
+      "email": "info@italiancorner.com",
+      "address": "123 Pasta St, Food City, FC 12345"
+    },
+    "menuItemList": [
+      {
+        "itemName": "Garlic Bread",
+        "price": 4.99
+      },
+      {
+        "itemName": "Caesar Salad",
+        "price": 6.99
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Chicken Tikka Masala",
+    "nameOfRestaurant": "Spice Route",
+    "imageLink": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQMQ4tf_uMkXJWvo_PLv34FmJQdjzeOLgD5Ynbed16p86EVqHHl",
+    "description": "Tender chicken pieces cooked in a creamy tomato-based sauce with Indian spices.",
+    "contactDetails": {
+      "phone": "234-567-8901",
+      "email": "info@spiceroute.com",
+      "address": "456 Curry Rd, Spice Town, ST 23456"
+    },
+    "menuItemList": [
+      {
+        "itemName": "Naan Bread",
+        "price": 2.99
+      },
+      {
+        "itemName": "Basmati Rice",
+        "price": 3.99
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Beef Burger",
+    "imageLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQudNj-OLQ5xa0JaxRO5RAqNTRX3YjNZRvWSRWqnjPVxZY99eqU",
+    "nameOfRestaurant": "Burger Bliss",
+    "description": "Juicy beef patty topped with lettuce, tomato, and a special sauce, served with fries.",
+    "contactDetails": {
+      "phone": "345-678-9012",
+      "email": "info@burgerbliss.com",
+      "address": "789 Grill Ave, Burger City, BC 34567"
+    },
+    "menuItemList": [
+      {
+        "itemName": "French Fries",
+        "price": 2.99
+      },
+      {
+        "itemName": "Onion Rings",
+        "price": 3.99
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Margherita Pizza",
+    "imageLink": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRW1MdAEkdSvwMeevrx9xmSG54MnW1MHLW7XCVloiVnonuG8eeb",
+    "nameOfRestaurant": "Pizza Palace",
+    "description": "Classic pizza with fresh tomatoes, mozzarella, and basil, baked to perfection.",
+    "contactDetails": {
+      "phone": "456-789-0123",
+      "email": "info@pizzapalace.com",
+      "address": "123 Dough St, Pizza Town, PT 45678"
+    },
+    "menuItemList": [
+      {
+        "itemName": "Cheesy Garlic Bread",
+        "price": 5.99
+      },
+      {
+        "itemName": "Tiramisu",
+        "price": 7.99
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Sushi Platter",
+    "imageLink": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQfKraD01A7ZAUjek8Zbg7MTYnZVsUaQ6SyM5i4qopvE5jmQxtr",
+    "nameOfRestaurant": "Sushi World",
+    "description": "An assortment of fresh sushi rolls including salmon, tuna, and vegetarian options.",
+    "contactDetails": {
+      "phone": "567-890-1234",
+      "email": "info@sushiworld.com",
+      "address": "321 Fish St, Sushi City, SC 56789"
+    },
+    "menuItemList": [
+      {
+        "itemName": "Miso Soup",
+        "price": 3.99
+      },
+      {
+        "itemName": "Edamame",
+        "price": 4.99
+      }
+    ]
+  }
+]

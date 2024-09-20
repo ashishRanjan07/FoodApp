@@ -18,7 +18,7 @@ import {useNavigation} from '@react-navigation/native';
 const RestaurantList = ({route}) => {
   const navigation = useNavigation();
   const {item, date} = route.params;
-  console.log(date, 'Line 21');
+  // console.log(date, 'Line 21');
   const type = item?.type;
   const typeName = item?.name;
   const [isLoading, setIsLoading] = useState(true);
@@ -58,7 +58,18 @@ const RestaurantList = ({route}) => {
           />
         </View>
         <View style={{padding: responsive(5)}}>
-          <Text style={styles.nameText}>{item?.Restaurant_Name}</Text>
+          <Text
+            style={[
+              styles.nameText,
+              {
+                color:
+                  item?.Restaurant_Name === 'Mita’s Kitchen'
+                    ? AppColor.white
+                    : AppColor.black,
+              },
+            ]}>
+            {item?.Restaurant_Name}
+          </Text>
         </View>
       </TouchableOpacity>
     );

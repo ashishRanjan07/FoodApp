@@ -22,8 +22,9 @@ const CartPage = ({route}) => {
   const navigation = useNavigation();
   const staticImageUrl = 'https://picsum.photos/200/300';
   const {cartItems, item, date, restaurantName, address} = route.params;
+  console.log(cartItems, 'line 25');
+  console.log(item, 'Line 26');
 
-  
   const [notes, setNotes] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -103,7 +104,7 @@ const CartPage = ({route}) => {
           <FlatList
             data={Object.values(cartItems)}
             renderItem={renderItem}
-            keyExtractor={(item,index) => index}
+            keyExtractor={(item, index) => index}
           />
         </View>
         {/* Give the note to kitchen */}

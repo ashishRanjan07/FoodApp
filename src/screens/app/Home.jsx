@@ -101,7 +101,8 @@ const Home = () => {
               image={ImagePath.f1}
               handleAction={() =>
                 navigation.navigate('Home Cocked Meal Services', {
-                  item: Data,type:TopCategory[0]
+                  item: Data,
+                  type: TopCategory[0],
                 })
               }
             />
@@ -119,14 +120,22 @@ const Home = () => {
               type={'Pre Order'}
               color={AppColor.green}
               image={ImagePath.f3}
-              handleAction={() => console.log('Clicked')}
+              handleAction={() =>
+                navigation.navigate('Weekend Restaurant List', {
+                  item: TopCategory[2],
+                })
+              }
             />
             <HomeCard
               name={'Authentic from your home Country'}
               type={'Instant Order'}
               color={AppColor.yellow}
               image={ImagePath.f4}
-              handleAction={() => console.log('Clicked')}
+              handleAction={() =>
+                navigation.navigate('Authentic Restaurant List', {
+                  item1: TopCategory[3],
+                })
+              }
             />
             {/* <FlatList
             data={TopCategory}

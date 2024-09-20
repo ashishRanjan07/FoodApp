@@ -19,35 +19,30 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 const HomeCockedRestaurantFoodList = ({route}) => {
   const navigation = useNavigation();
   const {item, name, date} = route.params;
-  console.log(item,"Line 22")
   const [searchText, setSearchText] = useState('');
   const [itemQuantities, setItemQuantities] = useState({});
   const [cartCount, setCartCount] = useState();
   const [cartItems, setCartItems] = useState({});
   const staticImageUrl = 'https://picsum.photos/200/300';
   const [groupedData, setGroupedData] = useState({});
+  const [addButtonClicked, setAddButtonClicked] = useState({}); // Track the state for each item
 
   const handleCartClicked = () => {
-    // console.log(cartItems, item, date, name, 'Line 33');
-
     navigation.navigate('Cart', {
       cartItems,
       item,
       date,
       restaurantName: name,
-      // address,
     });
   };
+
   useEffect(() => {
     const initialQuantities = {};
-
     if (item?.Menu_by_date) {
       const grouped = groupItemsByDate(item.Menu_by_date);
-      // console.log(grouped,"Line 46")
       setGroupedData(grouped);
       Object.entries(grouped).forEach(([date, items]) => {
         items.forEach(item => {
-          // console.log(item,"Line 50")
           initialQuantities[item.Item_ID] = 0;
         });
       });
@@ -73,32 +68,30 @@ const HomeCockedRestaurantFoodList = ({route}) => {
   const handlePlusClick = item => {
     setItemQuantities(prev => ({
       ...prev,
-      [item.Item_ID]: (prev[item.Item_ID] || 0) + 1, // Initialize to 0 if not present and then increment
+      [item.Item_ID]: (prev[item.Item_ID] || 0) + 1,
     }));
-    
-    updateCartItems(item, (itemQuantities[item.Item_ID] || 0) + 1); // Update the cart with the incremented quantity
+
+    updateCartItems(item, (itemQuantities[item.Item_ID] || 0) + 1);
   };
-  
+
   const handleMinusClick = item => {
     setItemQuantities(prev => ({
       ...prev,
-      [item.Item_ID]: Math.max(0, (prev[item.Item_ID] || 0) - 1), // Initialize to 0 if not present and then decrement
+      [item.Item_ID]: Math.max(0, (prev[item.Item_ID] || 0) - 1),
     }));
-    
-    updateCartItems(item, Math.max(0, (itemQuantities[item.Item_ID] || 0) - 1)); // Update the cart with the decremented quantity
+
+    updateCartItems(item, Math.max(0, (itemQuantities[item.Item_ID] || 0) - 1));
   };
-  
+
   const updateCartItems = (item, newQuantity) => {
     setCartItems(prevState => {
       const newCartItems = {...prevState};
       if (newQuantity > 0) {
-        // Add or update the item in the cart
         newCartItems[item.Item_ID] = {
           ...item,
           quantity: newQuantity,
         };
       } else {
-        // Remove the item if the quantity is zero
         delete newCartItems[item.Item_ID];
       }
       return newCartItems;
@@ -119,8 +112,9 @@ const HomeCockedRestaurantFoodList = ({route}) => {
   };
 
   const renderItem2 = ({item}) => {
-    const quantity = itemQuantities[item.Item_ID] || 0; // Initialize quantity to 0 if not present
-  
+    const quantity = itemQuantities[item.Item_ID] || 0;
+    const isAddButtonClicked = addButtonClicked[item.Item_ID] || false; // Get the state for each item
+
     return (
       <TouchableOpacity style={styles.itemContainer}>
         <View style={styles.imageHolder}>
@@ -135,33 +129,40 @@ const HomeCockedRestaurantFoodList = ({route}) => {
           <Text style={[styles.text, {color: AppColor.green}]}>
             ₹{item.Price}
           </Text>
-          <Text style={styles.pickupText}>Pickup from {item.time}</Text>
+          <Text style={styles.pickupText}>Pickup {item.time}</Text>
         </View>
-        <View style={styles.operatorHolder}>
-          <View style={styles.selectQty}>
+
+        <View style={styles.addButtonHolder}>
+          {isAddButtonClicked ? (
+            <View style={styles.conditionalButton}>
+              <TouchableOpacity
+                style={styles.plusHolder}
+                onPress={() => handleMinusClick(item)}>
+                <Text style={styles.plus}>-</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.plusHolder, {width: '20%'}]}>
+                <Text style={[styles.plus, {fontSize: responsive(16)}]}>
+                  {quantity}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.plusHolder}
+                onPress={() => handlePlusClick(item)}>
+                <Text style={styles.plus}>+</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
             <TouchableOpacity
-              style={styles.plusHolder}
-              onPress={() => handleMinusClick(item)}>
-              <Text style={styles.plus}>-</Text>
+              onPress={() => {
+                handlePlusClick(item);
+                setAddButtonClicked(prevState => ({
+                  ...prevState,
+                  [item.Item_ID]: true, // Track state for the specific item
+                }));
+              }}>
+              <Text style={styles.addToCardButtonText}>Add Item</Text>
             </TouchableOpacity>
-            <Text style={styles.countText}>{quantity}</Text>
-            <TouchableOpacity
-              style={styles.plusHolder}
-              onPress={() => handlePlusClick(item)}>
-              <Text style={styles.plus}>+</Text>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity
-            onPress={() => handlePlusClick(item)}
-            style={[
-              styles.selectQty,
-              {
-                backgroundColor: AppColor.success,
-                borderColor: AppColor.white,
-              },
-            ]}>
-            <Text style={styles.buttonText}>Add to Cart</Text>
-          </TouchableOpacity>
+          )}
         </View>
       </TouchableOpacity>
     );
@@ -187,6 +188,7 @@ const HomeCockedRestaurantFoodList = ({route}) => {
       </View>
     );
   };
+
   return (
     <View style={styles.main}>
       <StatusBar barStyle={'dark-content'} backgroundColor={AppColor.yellow} />
@@ -289,11 +291,11 @@ const styles = StyleSheet.create({
     width: '100%',
     marginVertical: responsive(5),
     borderRadius: responsive(10),
-    gap: responsive(5),
+    gap: responsive(10),
   },
   imageStyle: {
-    width: responsive(100),
-    height: responsive(100),
+    width: responsive(80),
+    height: responsive(80),
     borderRadius: responsive(10),
     alignSelf: 'center',
   },
@@ -303,24 +305,22 @@ const styles = StyleSheet.create({
     borderRadius: responsive(10),
   },
   textView: {
-    width: '40%',
+    width: '50%',
     gap: responsive(5),
     justifyContent: 'space-evenly',
   },
   nameText: {
     fontFamily: 'NotoSans-Medium',
     color: AppColor.black,
-    fontSize: responsive(14),
+    fontSize: responsive(16),
   },
   pickupText: {
     fontFamily: 'NotoSans-Medium',
     color: AppColor.red,
-    fontSize: responsive(12),
+    fontSize: responsive(14),
   },
   operatorHolder: {
-    // borderWidth: 2,
     width: '35%',
-    // flexDirection: 'row',
     alignItems: 'center',
   },
   selectQty: {
@@ -340,16 +340,13 @@ const styles = StyleSheet.create({
     fontFamily: 'NotoSans-Medium',
   },
   plusHolder: {
-    borderWidth: 2,
-    paddingHorizontal: responsive(10),
-    backgroundColor: AppColor.light,
-    borderRadius: responsive(5),
-    borderColor: AppColor.light,
+    width: '35%',
+    alignItems: 'center',
   },
   plus: {
-    color: AppColor.red,
+    color: AppColor.white,
     fontFamily: 'NotoSans-Medium',
-    fontSize: responsive(14),
+    fontSize: responsive(20),
   },
   buttonText: {
     fontFamily: 'NotoSans-Regular',
@@ -374,5 +371,23 @@ const styles = StyleSheet.create({
     fontSize: responsive(16),
     color: AppColor.white,
     fontFamily: 'NotoSans-Medium',
+  },
+  addButtonHolder: {
+    width: '25%',
+    backgroundColor: AppColor.green,
+    padding: responsive(10),
+    borderRadius: responsive(10),
+    alignItems: 'center',
+    alignSelf: 'center',
+  },
+  conditionalButton: {
+    flexDirection: 'row',
+    gap: responsive(5),
+    alignItems: 'center',
+    overflow: 'hidden',
+    // borderWidth:2,
+    width: '100%',
+    paddingHorizontal: responsive(5),
+    justifyContent: 'space-between',
   },
 });

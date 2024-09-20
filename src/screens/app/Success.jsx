@@ -13,7 +13,12 @@ const Success = () => {
   };
   return (
     <View style={styles.main}>
-      <View style={{width: '95%', gap: responsive(10)}}>
+      <View
+        style={{
+          width: '95%',
+          gap: responsive(15),
+          alignItems: 'center',
+        }}>
         <LottieView
           source={require('../../assets/animation/success.json')}
           autoPlay
@@ -36,13 +41,14 @@ const Success = () => {
           ]}>
           Your Order Pickup Date -23 rd Aug, Friday Dinner, pick up from 5:30 pm
         </Text>
-
-        <CustomButton
-          title={'Go Home'}
-          color={AppColor.yellow}
-          textColor={AppColor.white}
-          handleAction={handleAction}
-        />
+        <View style={{width: '90%'}}>
+          <CustomButton
+            title={'Go Home'}
+            color={AppColor.yellow}
+            textColor={AppColor.white}
+            handleAction={handleAction}
+          />
+        </View>
       </View>
     </View>
   );

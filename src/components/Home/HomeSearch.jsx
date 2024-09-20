@@ -38,10 +38,11 @@ const styles = StyleSheet.create({
     borderColor: AppColor.borderColor,
   },
   textInput: {
+    height: '100%',
     width: '90%',
     paddingHorizontal: responsive(10),
     fontFamily: 'NotoSans-Medium',
-    fontSize: responsive(16),
+    fontSize: responsive(14),
     color: AppColor.black,
   },
 });

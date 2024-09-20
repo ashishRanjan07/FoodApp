@@ -111,10 +111,12 @@ const styles = StyleSheet.create({
   imageHolder: {
     backgroundColor: AppColor.white,
     width: '25%',
+    alignItems:'center'
   },
   imageStyle: {
     height: responsive(100),
     width: responsive(100),
+    borderRadius:responsive(25)
   },
   loaderText: {
     fontSize: responsive(18),

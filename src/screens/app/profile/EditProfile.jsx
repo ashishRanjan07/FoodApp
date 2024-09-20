@@ -18,15 +18,15 @@ import CustomButton from '../../../components/CustomButton';
 
 const EditProfile = () => {
   const navigation = useNavigation();
-  const [name, setName] = useState('');
+  const [name, setName] = useState('Ashish Ranjan');
   const [nameError, setNameError] = useState(null);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('aviashishranjan@gmail.com');
   const [emailError, setEmailError] = useState(null);
-  const [mobile, setMobile] = useState('');
+  const [mobile, setMobile] = useState('6206416452');
   const [mobileError, setMobileError] = useState(null);
-  const [pinCode, setPinCode] = useState('');
+  const [pinCode, setPinCode] = useState('800007');
   const [pinCodeError, setPinCodeError] = useState(null);
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState('Village - Bairiya, Post - Bairiya Patna Bihar');
   const [addressError, setAddressError] = useState(null);
 
   const handleUpdateInfo = async () => {
