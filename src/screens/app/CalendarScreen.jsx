@@ -23,9 +23,12 @@ const CalendarScreen = ({route}) => {
     // console.log(NewDate, 'Line 21');
     setDate(NewDate);
     if (name) {
-      navigation.navigate('Home Cocked Restaurant Food List',{item:item,name:name,date:NewDate})
-    }
-     else {
+      navigation.navigate('Home Cocked Restaurant Food List', {
+        item: item,
+        name: name,
+        date: NewDate,
+      });
+    } else {
       navigation.navigate('Restaurant List', {item: item, date: NewDate});
     }
   };
@@ -52,20 +55,21 @@ const CalendarScreen = ({route}) => {
           }}
           firstDay={1}
           startFromMonday
-          // showDayStragglers={true}
           previousTitleStyle={styles.dateStyle}
           nextTitleStyle={styles.dateStyle}
-          selectedDayColor={'transparent'}
-          selectedDayStyle={{backgroundColor: 'transparent'}}
-          selectedDayTextColor={AppColor.red}
+          selectedDayColor={AppColor.primary}
+          selectedDayStyle={{backgroundColor: AppColor.primary}}
+          selectedDayTextColor={AppColor.white}
           selectedDayTextStyle={{
             fontFamily: 'NotoSans-Medium',
             fontSize: responsive(20),
+            // backgroundColor:AppColor.primary
           }}
           allowRangeSelection={
             item?.name === 'Authentic Specialties' ? false : true
           }
-          todayBackgroundColor="#f2e6ff"
+          todayBackgroundColor={AppColor.white}
+          todayTextStyle={{color: date ? AppColor.white : AppColor.red}}
         />
 
         <View

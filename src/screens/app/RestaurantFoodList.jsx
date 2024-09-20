@@ -18,24 +18,29 @@ import HomeSearch from '../../components/Home/HomeSearch';
 const RestaurantFoodList = ({route}) => {
   const navigation = useNavigation();
   const {item, date, restaurantName, address} = route.params;
-  // console.log(address, 'Line 10');
+  console.log(item,"Line 21");
+
   const [searchText, setSearchText] = useState('');
   const [itemQuantities, setItemQuantities] = useState({});
   const [cartCount, setCartCount] = useState(0);
   const [cartItems, setCartItems] = useState({});
+  const [addButtonClicked, setAddButtonClicked] = useState({}); // Track the state for each item
 
+  // Initialize quantities and cart items when item changes
   useEffect(() => {
     const initialQuantities = {};
+    console.log(item?.Menu,"Line 32")
     item?.Menu.forEach(menuItem => {
       initialQuantities[menuItem.Item_ID] = 0;
     });
     setItemQuantities(initialQuantities);
     setCartItems({});
-    updateCartCount();
   }, [item]);
 
+  // Update cart count whenever itemQuantities changes
   useEffect(() => {
     updateCartCount();
+    updateCartItems();
   }, [itemQuantities]);
 
   const updateCartCount = () => {
@@ -47,44 +52,42 @@ const RestaurantFoodList = ({route}) => {
     );
   };
 
+  // Update cartItems based on itemQuantities
+  const updateCartItems = () => {
+    const updatedCartItems = {};
+    item.Menu.forEach(menuItem => {
+      const quantity = itemQuantities[menuItem.Item_ID];
+      if (quantity > 0) {
+        updatedCartItems[menuItem.Item_ID] = {
+          ...menuItem,
+          quantity,
+        };
+      }
+    });
+    setCartItems(updatedCartItems);
+  };
+
+  // Increment item quantity
   const handlePlusClick = itemId => {
+    console.log(itemId,"Line 71")
     setItemQuantities(prevState => ({
       ...prevState,
       [itemId]: prevState[itemId] + 1,
     }));
-    updateCartItems(itemId);
   };
 
+  // Decrement item quantity
   const handleMinusClick = itemId => {
+    console.log(itemId,"Line 79")
     setItemQuantities(prevState => ({
       ...prevState,
       [itemId]: Math.max(0, prevState[itemId] - 1),
     }));
-    updateCartItems(itemId);
   };
 
-  const updateCartItems = itemId => {
-    console.log(item.Menu,"Line 67")
-    const menuItem = item.Menu.find(menuItem => menuItem.Item_ID === itemId);
-    console.log(menuItem,"Line 69")
-    if (!menuItem) return;
-
-    setCartItems(prevState => {
-      const newCartItems = {...prevState};
-      if (itemQuantities[itemId] > 0) {
-        newCartItems[itemId] = {
-          ...menuItem,
-          quantity: itemQuantities[itemId],
-        };
-      } else {
-        delete newCartItems[itemId];
-      }
-      return newCartItems;
-    });
-  };
-
+  // Navigate to Cart screen with updated cartItems
   const handleCartClicked = () => {
-    console.log(cartItems, item, date, restaurantName, 'Line 85');
+    // Ensure that cartItems are up-to-date before navigating
     navigation.navigate('Cart', {
       cartItems,
       item,
@@ -102,6 +105,7 @@ const RestaurantFoodList = ({route}) => {
 
   const renderItem = ({item}) => {
     const quantity = itemQuantities[item.Item_ID];
+    const isAddButtonClicked = addButtonClicked[item.Item_ID] || false;
     return (
       <TouchableOpacity style={styles.renderItem}>
         <View style={styles.imageHolder}>
@@ -119,7 +123,7 @@ const RestaurantFoodList = ({route}) => {
           <Text style={styles.descriptionText} numberOfLines={2}>
             {item?.Description}
           </Text>
-          <View style={styles.lowerButtonHolder}>
+          {/* <View style={styles.lowerButtonHolder}>
             <View style={styles.selectQty}>
               <TouchableOpacity
                 style={styles.plusHolder}
@@ -138,12 +142,46 @@ const RestaurantFoodList = ({route}) => {
               style={[
                 styles.selectQty,
                 {
-                  backgroundColor: AppColor.success,
-                  borderColor: AppColor.white,
+                  backgroundColor: AppColor.yellow,
+                  borderColor: AppColor.yellow,
                 },
               ]}>
-              <Text style={styles.buttonText}>Add to Cart</Text>
+              <Text style={styles.buttonText}>Add</Text>
             </TouchableOpacity>
+          </View> */}
+          <View style={styles.addButtonHolder}>
+            {isAddButtonClicked ? (
+              <View style={styles.conditionalButton}>
+                <TouchableOpacity
+                  style={styles.plusHolder}
+                  onPress={() => handleMinusClick(item.Item_ID)}>
+                  <Text style={styles.plus}>-</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.plusHolder, {width: '20%'}]}>
+                  <Text style={[styles.plus, {fontSize: responsive(16)}]}>
+                    {quantity}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.plusHolder}
+                  onPress={() => handlePlusClick(item.Item_ID)}>
+                  <Text style={styles.plus}>+</Text>
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <TouchableOpacity
+                onPress={() => {
+                  console.log(item.Item_ID,"Line 173")
+                  handlePlusClick(item.Item_ID);
+                  setAddButtonClicked(prevState => ({
+                    ...prevState,
+                    [item.Item_ID]: true, // Track state for the specific item
+                  }));
+                }}
+                style={styles.selectQty}>
+                <Text style={styles.buttonText}>Add Item</Text>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </TouchableOpacity>
@@ -269,9 +307,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   selectQty: {
-    borderWidth: 2,
-    width: '45%',
-    padding: responsive(10),
+    width: '100%',
+    padding: responsive(5),
     borderRadius: responsive(5),
     flexDirection: 'row',
     alignItems: 'center',
@@ -280,15 +317,15 @@ const styles = StyleSheet.create({
     borderColor: AppColor.borderColor,
   },
   buttonText: {
-    fontFamily: 'NotoSans-Regular',
+    fontFamily: 'NotoSans-Medium',
     color: AppColor.white,
-    fontSize: responsive(12),
+    fontSize: responsive(16),
     textAlign: 'center',
   },
   plus: {
-    color: AppColor.red,
+    color: AppColor.white,
     fontFamily: 'NotoSans-Medium',
-    fontSize: responsive(14),
+    fontSize: responsive(16),
   },
   countText: {
     fontSize: responsive(14),
@@ -296,11 +333,9 @@ const styles = StyleSheet.create({
     fontFamily: 'NotoSans-Medium',
   },
   plusHolder: {
-    borderWidth: 2,
-    paddingHorizontal: responsive(10),
-    backgroundColor: AppColor.light,
-    borderRadius: responsive(5),
-    borderColor: AppColor.light,
+    width:'35%',
+    padding: responsive(5),
+    alignItems:'center',
   },
   addToCardButton: {
     borderWidth: 2,
@@ -328,5 +363,24 @@ const styles = StyleSheet.create({
   detailedHolder: {
     width: '60%',
     gap: responsive(5),
+  },
+  addButtonHolder: {
+    width: '80%',
+    backgroundColor: AppColor.green,
+    padding: responsive(10),
+    borderRadius: responsive(10),
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginVertical: responsive(10),
+  },
+  conditionalButton: {
+    flexDirection: 'row',
+    gap: responsive(5),
+    alignItems: 'center',
+    overflow: 'hidden',
+    // borderWidth:2,
+    width: '100%',
+    paddingHorizontal: responsive(5),
+    justifyContent: 'space-between',
   },
 });

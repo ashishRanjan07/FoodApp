@@ -14,9 +14,7 @@ import Search from '../../screens/app/Search';
 const Tab = createMaterialBottomTabNavigator();
 const BottomNavigation = () => {
   return (
-    <Tab.Navigator
-      activeColor="#e91e63"
-      barStyle={{backgroundColor: AppColor.yellow}}>
+    <Tab.Navigator activeColor="#e91e63" barStyle={styles.barStyle}>
       <Tab.Screen
         name="Home"
         component={Home}
@@ -37,11 +35,7 @@ const BottomNavigation = () => {
         options={{
           tabBarLabel: 'Search',
           tabBarIcon: ({color}) => (
-            <MaterialIcons
-              name="search"
-              color={color}
-              size={responsive(26)}
-            />
+            <MaterialIcons name="search" color={color} size={responsive(26)} />
           ),
         }}
       />
@@ -75,4 +69,9 @@ const BottomNavigation = () => {
 
 export default BottomNavigation;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  barStyle: {
+    height: '7.5%',
+    backgroundColor: AppColor.yellow,
+  },
+});

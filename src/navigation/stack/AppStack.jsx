@@ -16,6 +16,8 @@ import HomeCockedRestaurantFoodList from '../../components/Home/HomeCockedRestau
 import EditProfile from '../../screens/app/profile/EditProfile';
 import Order from '../../screens/app/profile/Order';
 import PaymentInformation from '../../screens/app/PaymentInformation';
+import WeekendPartyRestaurantList from '../../screens/app/weekend_Party_Order/WeekendPartyRestaurantList';
+import AuthenticRestaurantList from '../../screens/app/authenticFood/AuthenticRestaurantList';
 
 const Stack = createNativeStackNavigator();
 
@@ -96,6 +98,18 @@ const AppStack = () => {
       <Stack.Screen
         name="Payment Information"
         component={PaymentInformation}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="Weekend Restaurant List"
+        component={WeekendPartyRestaurantList}
+        options={{headerShown: false}}
+      />
+      {/* AuthenticRestaurantList */}
+      <Stack.Screen
+        name="Authentic Restaurant List"
+        component={AuthenticRestaurantList}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

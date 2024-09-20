@@ -339,6 +339,7 @@ const styles = StyleSheet.create({
     gap: responsive(5),
     alignItems: 'center',
     backgroundColor: '#AFE1AF',
+    width:'96%'
   },
   textInputStyle: {
     width: '90%',
