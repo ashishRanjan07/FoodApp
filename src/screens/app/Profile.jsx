@@ -2,6 +2,7 @@ import {
   ActivityIndicator,
   Image,
   Modal,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -61,6 +62,7 @@ const Profile = () => {
 
   return (
     <View style={styles.main}>
+    <SafeAreaView/>
       {/* Upper Header Section */}
       <View style={styles.upperProfileHolderSection}>
         <Image

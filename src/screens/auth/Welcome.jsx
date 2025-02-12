@@ -6,6 +6,7 @@ import {
   Text,
   View,
   Animated,
+  SafeAreaView,
 } from 'react-native';
 import {AppColor} from '../../utils/AppColor';
 import {ImagePath} from '../../utils/ImagePath';
@@ -28,6 +29,7 @@ const Welcome = () => {
 
   return (
     <View style={styles.main}>
+    <SafeAreaView/>
       <StatusBar barStyle={'dark-content'} backgroundColor={AppColor.yellow} />
       <ImageBackground
         source={ImagePath.welcome}

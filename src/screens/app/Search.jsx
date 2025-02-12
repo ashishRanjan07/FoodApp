@@ -1,6 +1,7 @@
 import {
   FlatList,
   Image,
+  SafeAreaView,
   StatusBar,
   StyleSheet,
   Text,
@@ -44,6 +45,7 @@ const Search = () => {
 
   return (
     <View style={styles.main}>
+    <SafeAreaView/>
       <StatusBar backgroundColor={AppColor.yellow} barStyle={'dark-content'} />
       <UpperHeader />
       <View style={{flex:1}}>

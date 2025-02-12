@@ -1,6 +1,7 @@
 import {
   FlatList,
   Image,
+  SafeAreaView,
   StatusBar,
   StyleSheet,
   Text,
@@ -44,6 +45,7 @@ const HomeCoockedMealServices = ({route}) => {
   };
   return (
     <View style={styles.main}>
+        <SafeAreaView style={{backgroundColor:AppColor.yellow }}/>
       <StatusBar barStyle={'dark-content'} backgroundColor={AppColor.yellow} />
       <CustomHeader title={type?.name} />
       <UpperHeader />

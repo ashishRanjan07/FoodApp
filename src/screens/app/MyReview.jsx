@@ -1,4 +1,4 @@
-import {StatusBar, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Pending from './Pending';
@@ -56,6 +56,7 @@ const MyReview = () => {
   return (
     <>
       <StatusBar backgroundColor={AppColor.yellow} barStyle={'dark-content'} />
+          <SafeAreaView style={{backgroundColor:AppColor.yellow }}/>
       <CustomHeader title={'My Review'} />
       {pendingData && publishedData ? (
         <Tab.Navigator

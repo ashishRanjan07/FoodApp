@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {AppColor} from '../../utils/AppColor';
 import CustomHeader from '../CustomHeader';
@@ -12,6 +12,7 @@ const FoodDetails = ({route}) => {
   // console.log(item, 'line 8');
   return (
     <View style={styles.main}>
+        <SafeAreaView style={{backgroundColor:AppColor.yellow }}/>
       <CustomHeader title={`${item?.name}`} />
       <Image
         source={{uri: `https://picsum.photos/id/${item.id}/200/300`}}

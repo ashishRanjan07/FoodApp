@@ -2,6 +2,7 @@ import {
   FlatList,
   Image,
   Modal,
+  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -104,6 +105,7 @@ const WeekendPartyRestaurantList = ({route}) => {
 
   return (
     <View style={styles.main}>
+      <SafeAreaView style={{backgroundColor:AppColor.yellow }}/>
       <CustomHeader title={`${item?.name}`} />
       <UpperHeader />
       <HomeSearch

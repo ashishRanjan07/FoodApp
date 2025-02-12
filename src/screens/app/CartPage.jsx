@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {
   FlatList,
   Image,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -80,6 +81,7 @@ const CartPage = ({route}) => {
 
   return (
     <View style={styles.main}>
+     <SafeAreaView style={{backgroundColor:AppColor.yellow }}/>
       <CustomHeader title={'Cart'} />
       <UpperHeader />
       {/* Delivery Related Info */}

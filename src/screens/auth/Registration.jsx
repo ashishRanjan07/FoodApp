@@ -1,6 +1,7 @@
 import {
   Image,
   ImageBackground,
+  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -104,6 +105,7 @@ const Registration = () => {
   return (
     <>
       <View style={styles.main}>
+      <SafeAreaView/>
         <View style={styles.firstImageHolder}>
           <Image
             source={ImagePath.registration1}

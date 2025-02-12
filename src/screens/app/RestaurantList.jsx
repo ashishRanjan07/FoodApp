@@ -2,6 +2,7 @@ import {
   ActivityIndicator,
   FlatList,
   Image,
+  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -76,6 +77,7 @@ const RestaurantList = ({route}) => {
   };
   return (
     <View style={styles.main}>
+     <SafeAreaView style={{backgroundColor:AppColor.yellow }}/>
       <CustomHeader title={`${item?.name}`} />
       <UpperHeader />
       <View style={styles.contentHolder}>

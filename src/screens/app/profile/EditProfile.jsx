@@ -1,4 +1,5 @@
 import {
+  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -34,6 +35,7 @@ const EditProfile = () => {
   };
   return (
     <View style={styles.main}>
+    <SafeAreaView style={{backgroundColor:AppColor.yellow }}/>
       <StatusBar barStyle={'dark-content'} backgroundColor={AppColor.yellow} />
       <CustomHeader title={'Edit Profile'} />
       <ScrollView style={styles.main}>

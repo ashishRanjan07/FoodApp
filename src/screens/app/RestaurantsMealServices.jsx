@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   StatusBar,
+  SafeAreaView,
 } from 'react-native';
 import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
@@ -52,6 +53,7 @@ const RestaurantsMealServices = ({route}) => {
   };
   return (
     <View style={styles.main}>
+     <SafeAreaView style={{backgroundColor:AppColor.yellow }}/>
       <StatusBar barStyle={'dark-content'} backgroundColor={AppColor.yellow} />
       <CustomHeader title={item?.Restaurant_Name} />
       <UpperHeader />

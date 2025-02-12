@@ -1,6 +1,7 @@
 import {
   FlatList,
   Image,
+  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -190,6 +191,7 @@ const RestaurantFoodList = ({route}) => {
 
   return (
     <View style={styles.main}>
+     <SafeAreaView style={{backgroundColor:AppColor.yellow }}/>
       <CustomHeader title={restaurantName} />
       <UpperHeader />
       <HomeSearch

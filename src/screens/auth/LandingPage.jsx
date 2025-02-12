@@ -1,4 +1,4 @@
-import {Image, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {Image, SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {AppColor} from '../../utils/AppColor';
@@ -14,6 +14,7 @@ const LandingPage = () => {
   };
   return (
     <View style={styles.main}>
+    <SafeAreaView/>
       <StatusBar backgroundColor={AppColor.white} barStyle={'dark-content'} />
       <View style={styles.imageHolder}>
         <Image

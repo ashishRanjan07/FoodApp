@@ -11,6 +11,7 @@ import {
   ScrollView,
   Modal,
   PermissionsAndroid,
+  SafeAreaView,
 } from 'react-native';
 import React, {useState, useRef, useEffect} from 'react';
 import {AppColor} from '../../utils/AppColor';
@@ -143,6 +144,7 @@ const Login = () => {
     <>
       <ScrollView style={styles.main}>
         <StatusBar backgroundColor={AppColor.white} barStyle={'dark-content'} />
+        <SafeAreaView/>
         <View style={styles.imageHolder}>
           <Image
             source={ImagePath.login1}

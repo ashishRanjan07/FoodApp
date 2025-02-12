@@ -1,4 +1,4 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {AppColor} from '../../utils/AppColor';
 import CustomHeader from '../../components/CustomHeader';
@@ -34,6 +34,7 @@ const CalendarScreen = ({route}) => {
   };
   return (
     <View style={styles.main}>
+       <SafeAreaView style={{backgroundColor:AppColor.yellow }}/>
       <CustomHeader title={'Select Date'} />
       <ScrollView>
         <UpperHeader />

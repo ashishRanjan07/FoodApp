@@ -2,6 +2,7 @@ import {
   FlatList,
   Image,
   Modal,
+  SafeAreaView,
   StatusBar,
   StyleSheet,
   Text,
@@ -51,6 +52,7 @@ const Notification = () => {
   };
   return (
     <View style={styles.main}>
+    <SafeAreaView/>
       <StatusBar barStyle={'dark-content'} backgroundColor={AppColor.yellow} />
       <CustomHeader title={'Notification'} />
       <FlatList

@@ -1,6 +1,7 @@
 import {
   FlatList,
   Image,
+  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -49,6 +50,7 @@ const Home = () => {
 
   return (
     <View style={styles.main}>
+    <SafeAreaView/>
       <StatusBar backgroundColor={AppColor.yellow} barStyle={'dark-content'} />
       <UpperHeader />
       <HomeSearch
